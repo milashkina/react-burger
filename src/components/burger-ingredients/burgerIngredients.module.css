@@ -1,0 +1,17 @@
+.flex {
+    display: flex;
+}
+.inlineBlock {
+    display: inline-block;
+}
+.containerIngredients{
+    height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.wrapperCard {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}

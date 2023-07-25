@@ -1,0 +1,11 @@
+.wrapperCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.wrapper_currency {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

@@ -1,0 +1,20 @@
+:root {
+    --interface-modal-bg: #1C1C21;
+    --interface-accent: #4C4CFF;
+    --interface-success: #00CCCC;
+    --text-dark-grey: #8585AD;
+    --text-primary-light: #F2F2F3;
+    --main-white: #FFFFFF;
+    --button-normal: #801AB2, #4C4CFF;
+    --interface-input: #2F2F37;
+    --neon: #B5FF3D;
+    --main-pink: #E33CD5;
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    gap: 40px;
+}
