@@ -1,0 +1,45 @@
+.flex{
+    display: flex;
+}
+
+.containerConstructor {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.containerConstructorInside {
+    composes: containerConstructor;
+    height: 500px;
+    overflow-y: auto;
+}
+.wrapperConstructor{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+/* custom scrollbar start */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7e7eb2;
+}
+/* custom scrollbar end */
+
+.containerConstructorFinal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
