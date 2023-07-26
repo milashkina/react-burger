@@ -4,7 +4,7 @@ export default function AppHeader() {
 
   return(
     <header className={`${style.appHeader} + p-4`}>
-      <div className={`${style.navMenu}`}>
+      <nav className={`${style.navMenu}`}>
         <div className={`${style.container} + p-4 text text_type_main-default`}>
           <div className={`${style.container} + mr-2`} ><BurgerIcon type="primary" /></div>
           Конструктор
@@ -13,7 +13,7 @@ export default function AppHeader() {
           <div className={`${style.container} + mr-2`} ><ListIcon type="secondary" /></div>
           Лента заказов
         </div>
-      </div>
+      </nav>
       <div>
         <Logo />
       </div>

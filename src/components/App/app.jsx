@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <AppHeader />
-      <div className={`${style.flexContainer} + pt-10`}>
+      <main className={`${style.flexContainer} + pt-10`}>
         <BurgerIngredients />
         <BurgerConstructor />
-      </div>
+      </main>
     </div>
   );
 }
