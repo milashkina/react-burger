@@ -9,7 +9,7 @@ export default function BurgerConstructor() {
 
 
   return (
-    <div className={`pt-15`}>
+    <section className={`pt-15`}>
       <div className={`${style.containerConstructor}`}>
         <div className={`${style.containerConstructor} + pl-8`}>
           <ConstructorElement
@@ -89,6 +89,6 @@ export default function BurgerConstructor() {
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   )
 }
