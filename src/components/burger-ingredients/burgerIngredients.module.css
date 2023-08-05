@@ -4,14 +4,8 @@
 .inlineBlock {
     display: inline-block;
 }
-.containerIngredients{
-    height: 500px;
+.productList {
+    width: 600px;
+    height:756px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-.wrapperCard {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
 }

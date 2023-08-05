@@ -1,17 +1,20 @@
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../product-list/product-list.module.css'
 
-export default function ProductList() {
+export default function ProductList({data}) {
   return(
-    <div className={`${style.wrapperCard}`}>
-      <Counter count={1} size="default" extraClass="m-1" />
-      <img src='https://code.s3.yandex.net/react/code/bun-02.png' alt='Краторная булка N-200i' className={`p-4`} />
-      <div className={`${style.wrapper_currency} + pt-1 pb-1 `}>
-        <span className={`text text_type_digits-default`}>1255</span>
-        <CurrencyIcon type="primary" />
-      </div>
-      <span className={`text text_type_main-default`}>Краторная булка N-200i</span>
+    <div className={`${style.productWrapper} + pt-6 pb-10 pl-4`}>
+      {data?.map((elem,index) =>
+        <div key={index}>
+          <Counter count={1} size="default" extraClass="m-1" />
+          <img src={elem.image} alt={elem.name} className={`p-4`} />
+          <div className={` pt-1 pb-1 `}>
+            <span className={`text text_type_digits-default`}>{elem.price}</span>
+            <CurrencyIcon type="primary" />
+          </div>
+          <span className={`text text_type_main-default`}>{elem.name}</span>
+        </div>)
+      }
     </div>
-
   )
 }

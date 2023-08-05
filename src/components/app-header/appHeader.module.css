@@ -21,4 +21,5 @@
 .container {
     composes: navMenu;
     align-items: center;
+    text-decoration: none;
 }

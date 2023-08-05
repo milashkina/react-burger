@@ -1,11 +1,19 @@
-.wrapperCard{
+.productWrapper {
+    display: grid;
+    grid-column-gap: 24px;
+    grid-template-columns: repeat(2, min-content);
+}
+.productWrapper > div {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+
 }
-.wrapper_currency {
+.productWrapper > div > div {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
 }

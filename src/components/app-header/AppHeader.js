@@ -5,22 +5,22 @@ export default function AppHeader() {
   return(
     <header className={`${style.appHeader} + p-4`}>
       <nav className={`${style.navMenu}`}>
-        <div className={`${style.container} + p-4 text text_type_main-default`}>
+        <a href="#" className={`${style.container} + p-4 text text_type_main-default text_color_inactive`}>
           <div className={`${style.container} + mr-2`} ><BurgerIcon type="primary" /></div>
           Конструктор
-        </div>
-        <div className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
+        </a>
+        <a href="#" className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
           <div className={`${style.container} + mr-2`} ><ListIcon type="secondary" /></div>
           Лента заказов
-        </div>
+        </a>
       </nav>
       <div>
         <Logo />
       </div>
-      <div className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
+      <a href="#" className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
         <div className={`${style.container} + mr-2`} ><ProfileIcon type="secondary" /></div>
         Личный кабинет
-      </div>
+      </a>
     </header>
   )
 }
