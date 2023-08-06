@@ -1,0 +1,11 @@
+.flex {
+    display: flex;
+}
+.inlineBlock {
+    display: inline-block;
+}
+.productList {
+    width: 600px;
+    height:756px;
+    overflow-y: auto;
+}
