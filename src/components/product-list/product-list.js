@@ -6,7 +6,6 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 
 export default function ProductList({data}) {
-  console.log('data in productList', data)
   const [isHidden, setHidden] = useState(true)
   const [selectIngredient, setSelectIngredient] = useState({})
   const handleOpen = (elem) => {
