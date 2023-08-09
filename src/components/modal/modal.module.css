@@ -1,0 +1,31 @@
+.modalWrap {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 640px;
+    align-items: center;
+    border-radius: 40px;
+    border: 1px solid var(rgba(76, 76, 255, 0.20));
+    background: var(--interface-modal-bg, #1C1C21);
+    position: fixed;
+    top: 5%;
+    left: 25%;
+    z-index: 1000;
+}
+.modalWrap > .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+.modalWrap > div > span {
+    width: 580px;
+}
+.modalContent {
+    width: 100px;
+    height: 100px;
+}
+.iconClose {
+    cursor: pointer;
+    display: flex;
+}
