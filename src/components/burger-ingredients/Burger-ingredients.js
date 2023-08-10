@@ -7,14 +7,19 @@ import PropTypes from "prop-types";
 
 
 export default function BurgerIngredients({data}) {
-  const bun = useMemo(() => {
-    return data?.filter(elem => elem?.type === 'bun')
+
+  console.log(data)
+  const bun = 'bun';
+  const main = 'main';
+  const sauce = 'sauce';
+  const bunArr = useMemo(() => {
+    return data?.filter(elem => elem?.type === bun)
   }, [data])
-  const main = useMemo(() => {
-    return data?.filter(elem => elem.type === 'main')
+  const mainArr = useMemo(() => {
+    return data?.filter(elem => elem.type === main)
   }, [data])
-  const sauce = useMemo(() => {
-    return data?.filter(elem => elem.type === 'sauce')
+  const sauceArr = useMemo(() => {
+    return data?.filter(elem => elem.type === sauce)
   }, [data])
 
   return(
@@ -23,16 +28,31 @@ export default function BurgerIngredients({data}) {
         <Tabs />
         <div className={`${style.productList}`}>
           <h2 className={`text text_type_main-medium`}>Булки</h2>
-          <ProductList data={bun}/>
+          <ProductList data={bunArr}/>
           <h2 className={`text text_type_main-medium`}>Соусы</h2>
-          <ProductList data={sauce}/>
+          <ProductList data={sauceArr}/>
           <h2 className={`text text_type_main-medium`}>Начинки</h2>
-          <ProductList data={main}/>
+          <ProductList data={mainArr}/>
         </div>
     </section>
   )
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf,
+  data: PropTypes.arrayOf(PropTypes.shape(
+    {
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      proteins: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      carbohydrates:PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+      image_mobile: PropTypes.string.isRequired,
+      image_large: PropTypes.string.isRequired,
+      __v: PropTypes.number.isRequired,
+    }
+  )).isRequired
 }
