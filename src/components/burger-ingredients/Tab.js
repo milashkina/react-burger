@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./burgerIngredients.module.css";
+import style from "./burger-ingredients.module.css";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const Tabs = () => {
