@@ -23,7 +23,6 @@ function App() {
       type: CLOSE_ORDER_INFO_MODAL
     })
   }
- // const orderDetailsModal = useSelector(state => state.orderDetails.modalIsOpen);
 
   function handleClose() {
     dispatch({
