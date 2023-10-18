@@ -1,37 +1,60 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import style from '../App/app.module.css'
 import AppHeader from "../app-header/AppHeader";
 import BurgerIngredients from "../burger-ingredients/Burger-ingredients";
 import BurgerConstructor from "../burger-constructor/Burger-constructor";
-import {UseGetIngredients} from "../../utils/useGetIngredients";
+import {useDispatch, useSelector} from "react-redux";
+import {CLOSE_INGREDIENT_DETAILS_MODAL, UNSELECT_INGREDIENT} from "../../services/actions/details";
+import {selectIngredient} from '../../services/reducers/details'
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import OrderDetails from "../order-details/order-details";
+import {Modal} from "../modal/modal";
+import {getIngredients} from "../../services/reducers/burger-ingredients";
+import {CLOSE_ORDER_INFO_MODAL} from "../../services/actions/order-info";
 
 function App() {
-  const [data, setData] = useState({
-    success: false,
-    data: [],
-  })
-  const [hasError, setHasError] = useState('')
 
-  useEffect(() => {
-    getIngredients()
-  }, []);
+  const dispatch = useDispatch();
 
-  function getIngredients() {
-    UseGetIngredients()
-      .then(json => setData({data: json.data, success: true}))
-      .catch(err => {
-        setHasError(err)
-        console.log(hasError)
-      })
+  const ingredientDetailsModal = useSelector(state => state.ingredientDetails.modalIsOpen);
+  const orderInfoModal = useSelector(state => state.orderInfo.modalIsOpen)
+  const handleCloseOrderDetails = () => {
+    dispatch({
+      type: CLOSE_ORDER_INFO_MODAL
+    })
   }
+ // const orderDetailsModal = useSelector(state => state.orderDetails.modalIsOpen);
+
+  function handleClose() {
+    dispatch({
+      type: CLOSE_INGREDIENT_DETAILS_MODAL
+    });
+    dispatch({
+      type: UNSELECT_INGREDIENT
+    });
+  }
+  useEffect(() => {
+    dispatch(getIngredients())
+  }, [dispatch]);
 
   return (
-    <div className="App">
+     <div className="App">
       <AppHeader />
       <main className={`${style.flexContainer} + pt-10`}>
-        {data && <BurgerIngredients data={data.data}/>}
+        <BurgerIngredients />
         <BurgerConstructor/>
       </main>
+       {
+         ingredientDetailsModal && (
+           <Modal onClose={handleClose} header="Детали ингредиента">
+             <IngredientDetails data={selectIngredient}/>
+           </Modal>
+         )
+       }
+       {orderInfoModal &&
+         <Modal onClose={handleCloseOrderDetails}>
+           <OrderDetails />
+         </Modal>}
     </div>
   );
 }

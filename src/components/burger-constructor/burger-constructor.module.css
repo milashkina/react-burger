@@ -30,16 +30,16 @@
 ::-webkit-scrollbar-thumb {
     background: #8585AD;
 }
-
-
 ::-webkit-scrollbar-thumb:hover {
     background: #7e7eb2;
 }
 /* custom scrollbar end */
-
 .containerConstructorFinal {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: end;
+}
+.borderAccent > section > div {
+    background-color: var(--colors-interface-accent);
 }

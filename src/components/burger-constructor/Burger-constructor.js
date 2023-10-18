@@ -1,60 +1,130 @@
 import style from './burger-constructor.module.css'
-import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useState} from "react";
-import {data} from "../../utils/data"
+import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useState} from "react";
 import {Modal} from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import {useDispatch, useSelector} from "react-redux";
+import {useDrop} from "react-dnd";
+import {DND_TYPES} from "../../utils/constant";
+import {
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT, CHANGE_BUN,
+} from "../../services/actions/burger-constructor";
+import {
+  REVERSE_BUN,
+  DECREASE_COUNT,
+  INCREASE_COUNT,
+} from "../../services/actions/burger-ingredients";
+import {ConstructorCard} from "../constructor-card/constructor-card";
+import {nanoid} from "nanoid/non-secure";
+import {postOrder} from "../../services/reducers/order-info";
+
 export default function BurgerConstructor() {
-  let total = 0;
-  data?.map(elem => total += elem.price)
+  const dispatch = useDispatch()
+  const { ingredients, bun } = useSelector(state => state.burgerConstructor)
+  let total = 0
+  ingredients?.map(elem => total += elem.price)
+  total +=  bun.price * 2
   const [isHidden, setHidden] = useState(true)
-  const handleOpen = () => {
-    setHidden(false)
-  }
   const handleClose = () => {
     setHidden(true)
   }
+  const [{ isOver },drop] = useDrop({
+    accept: DND_TYPES.ADD_INGREDIENT,
+    drop(ingredient) {
+      addIngredientInConstructor(ingredient)
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver()
+    })
+  })
+  function addIngredientInConstructor(ingredient) {
+    const {type} = ingredient
 
+    if(type === 'bun') {
+      dispatch({
+        type: REVERSE_BUN,
+        bun: ingredient,
+        _id: ingredient._id,
+      })
+      dispatch({
+        type: CHANGE_BUN,
+        bun: ingredient
+      })
+    } else if(ingredients.includes(ingredient)) {
+      //add previous ingredient in constructor
+      dispatch({
+        type: INCREASE_COUNT,
+        ingredient: ingredient,
+      })
+    } else {
+      //add new ingredient in constructor
+      dispatch({
+        type: ADD_INGREDIENT,
+        ingredient: ingredient,
+      })
+      dispatch({
+        type: INCREASE_COUNT,
+        ingredient: ingredient,
+        _id: ingredient._id
+      })
+    }
+  }
+  function deleteIngredientFromConstructor(ingredient) {
+      dispatch({
+        type: DECREASE_COUNT,
+        ingredient: ingredient,
+        _id: ingredient._id,
+      })
+      dispatch({
+        type: DELETE_INGREDIENT,
+        ingredient: ingredient,
+        _id: ingredient._id
+      })
+
+  }
+
+  const handlePostOrder = () => {
+    const dataRequest = JSON.stringify({ingredients: ingredients.map((ingredient) => ingredient._id).concat(bun._id)})
+    dispatch(postOrder(dataRequest))
+  }
   return (
-    <section className={`pt-15`}>
-      <div className={`${style.containerConstructor} + pl-8 pb-4`}>
+    <section ref={drop} className={ isOver ? `${style.borderAccent} + pt-15` : 'pt-15'}>
+      <section className={`${style.containerConstructor} + pl-8 pb-4`}>
         <ConstructorElement
           type="top"
           isLocked
-          text={data[0]?.name + '(верх)'}
-          price={data[0]?.price}
-          thumbnail={data[0]?.image}
+          text={bun?.name + '(верх)'}
+          price={bun?.price}
+          thumbnail={bun?.image}
         />
-      </div>
+      </section>
       <div className={`${style.containerConstructor}`}>
         <div className={`${style.containerConstructorInside}`}>
-          { data?.map((elem, index) =>
-            <div key={index} className={`${style.wrapperConstructor}`}>
-              <DragIcon type="primary"/>
-              <ConstructorElement
-                text={elem.name}
-                price={elem.price}
-                thumbnail={elem.image}
-              />
-            </div>
+          { ingredients?.map((elem, index) =>
+            <ConstructorCard
+              elem={elem}
+              index={index}
+              key={nanoid()}
+              deleteIngredientFromConstructor={deleteIngredientFromConstructor}/>
           )}
         </div>
-        <div className={`${style.containerConstructor} + pl-8`}>
+      </div>
+        <section className={`${style.containerConstructor} + pl-8 mt-4`} >
           <ConstructorElement
             type="bottom"
             isLocked
-            text={data[0]?.name + '(низ)'}
-            price={data[0]?.price}
-            thumbnail={data[0]?.image}
+            text={bun?.name + '(низ)'}
+            price={bun?.price}
+            thumbnail={bun?.image}
           />
-        </div>
-      </div>
+        </section>
       <div className={`${style.containerConstructorFinal} + pt-10 pb-10 pl-4 pr-4`}>
         <div className={`pr-10`}>
           <span className={`pr-2 text text_type_digits-medium`} >{total}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={handleOpen}>
+        <Button htmlType="button" type="primary" size="large" onClick={handlePostOrder}>
           Оформить заказ
         </Button>
       </div>

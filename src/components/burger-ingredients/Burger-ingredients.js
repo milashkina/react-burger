@@ -1,58 +1,91 @@
-import {Tabs} from './Tab'
+import Tabs from './Tab'
 import React, {useMemo} from "react";
 import style from './burger-ingredients.module.css'
 import ProductList from "../product-list/product-list";
-import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
+import {OPEN_INGREDIENT_DETAILS_MODAL} from "../../services/actions/details";
+import {selectIngredient} from '../../services/reducers/details'
+import {INGREDIENT_TYPE, INGREDIENTS_TITLES} from "../../utils/constant";
+import {CHANGE_TAB} from "../../services/actions/burger-ingredients";
+export default function BurgerIngredients() {
 
+  const dispatch = useDispatch()
+  const {ingredients} = useSelector(state => state.burgerIngredients);
 
+  const bunArr = React.useMemo(() =>
+    ingredients.filter((elem) => elem.type === INGREDIENT_TYPE.BUN), [ingredients]);
+  const mainArr = useMemo(() =>
+    ingredients.filter(elem => elem.type === INGREDIENT_TYPE.MAIN), [ingredients])
+  const sauceArr = useMemo(() =>
+    ingredients.filter(elem => elem.type === INGREDIENT_TYPE.SAUCE), [ingredients])
 
-export default function BurgerIngredients({data}) {
+  const bunRef = React.useRef(null);
+  const sauceRef = React.useRef(null);
+  const mainRef = React.useRef(null);
 
-  console.log(data)
-  const bun = 'bun';
-  const main = 'main';
-  const sauce = 'sauce';
-  const bunArr = useMemo(() => {
-    return data?.filter(elem => elem?.type === bun)
-  }, [data])
-  const mainArr = useMemo(() => {
-    return data?.filter(elem => elem.type === main)
-  }, [data])
-  const sauceArr = useMemo(() => {
-    return data?.filter(elem => elem.type === sauce)
-  }, [data])
+  function handleIngredientCardClick(ingredient) {
+    dispatch(
+      selectIngredient(ingredient)
+    )
+    dispatch({
+      type: OPEN_INGREDIENT_DETAILS_MODAL,
+    })
+  }
 
-  return(
+  function handleTabClick(elem) {
+    dispatch({
+      type: CHANGE_TAB,
+      elem,
+    })
+    switch (elem) {
+      case INGREDIENTS_TITLES.BUN:
+        bunRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+        break;
+      case INGREDIENTS_TITLES.SAUCE:
+        sauceRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+        break;
+      case INGREDIENTS_TITLES.MAIN:
+        mainRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+        break;
+      default:
+        break;
+    }
+  }
+
+  function handleScroll(e) {
+    const scrollTop = e.target.scrollTop;
+    const sauceScrollTop = sauceRef.current.getBoundingClientRect().top;
+    const mainScrollTop = mainRef.current.getBoundingClientRect().top;
+    if (scrollTop >= mainScrollTop) {
+      dispatch({
+        type: CHANGE_TAB,
+        elem: INGREDIENTS_TITLES.MAIN,
+      });
+    } else if (sauceScrollTop >= scrollTop) {
+      dispatch({
+        type: CHANGE_TAB,
+        elem: INGREDIENTS_TITLES.BUN,
+      });
+    } else {
+      dispatch({
+        type: CHANGE_TAB,
+        elem: INGREDIENTS_TITLES.SAUCE,
+      });
+    }
+  }
+
+  return (
     <section className={``}>
       <span className={`text text_type_main-large pb-5`}> Соберите бургер</span>
-        <Tabs />
-        <div className={`${style.productList}`}>
-          <h2 className={`text text_type_main-medium`}>Булки</h2>
-          <ProductList data={bunArr}/>
-          <h2 className={`text text_type_main-medium`}>Соусы</h2>
-          <ProductList data={sauceArr}/>
-          <h2 className={`text text_type_main-medium`}>Начинки</h2>
-          <ProductList data={mainArr}/>
-        </div>
+      <Tabs onClick={handleTabClick}/>
+      <div className={`${style.productList}`} onScroll={handleScroll}>
+        <h2 className={`text text_type_main-medium`} ref={bunRef}>{INGREDIENTS_TITLES.BUN}</h2>
+        <ProductList ingredients={bunArr} onSelect={handleIngredientCardClick}/>
+        <h2 className={`text text_type_main-medium`} ref={sauceRef}>{INGREDIENTS_TITLES.SAUCE}</h2>
+        <ProductList ingredients={sauceArr} onSelect={handleIngredientCardClick}/>
+        <h2 className={`text text_type_main-medium`} ref={mainRef}>{INGREDIENTS_TITLES.MAIN}</h2>
+        <ProductList ingredients={mainArr} onSelect={handleIngredientCardClick}/>
+      </div>
     </section>
   )
-}
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(
-    {
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      proteins: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      carbohydrates:PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string.isRequired,
-      image_large: PropTypes.string.isRequired,
-      __v: PropTypes.number.isRequired,
-    }
-  )).isRequired
 }
