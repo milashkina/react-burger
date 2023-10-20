@@ -8,6 +8,6 @@ export const ModalOverlay = (props) => {
 }
 
 ModalOverlay.PropsTypes = {
-  onClose: PropsTypes.func,
+  onClose: PropsTypes.func.isRequired,
   children: PropsTypes.element,
 }

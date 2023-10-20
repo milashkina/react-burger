@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const INGREDIENTS_TITLES = {
   BUN: 'Булки',
   SAUCE: 'Соусы',
@@ -9,22 +11,6 @@ export const INGREDIENT_TYPE  = {
   MAIN: 'main',
 }
 
-export const BUN_BY_DEFAULT = {
-  _id: "643d69a5c3f7b9001cfa093c",
-  name: "Краторная булка N-200i",
-  type: "bun",
-  proteins: 80,
-  fat: 24,
-  carbohydrates: 53,
-  calories: 420,
-  price: 1255,
-  image: "https://code.s3.yandex.net/react/code/bun-02.png",
-  image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-  image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-  __v: 0,
-  quantity: 0,
-};
-
 export const DND_TYPES = {
   ADD_INGREDIENT: 'ADD_INGREDIENT',
   SORTING_CARD: 'SORTING_CARD',
@@ -33,3 +19,19 @@ export const DND_TYPES = {
 export const API_ORDERS = 'https://norma.nomoreparties.space/api/orders'
 
 export const API_INGREDIENTS = 'https://norma.nomoreparties.space/api/ingredients'
+export const INGREDIENT_PROP_TYPES = PropTypes.shape(
+  {
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates:PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    __v: PropTypes.number.isRequired,
+  }
+).isRequired

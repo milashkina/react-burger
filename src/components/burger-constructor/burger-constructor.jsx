@@ -23,8 +23,12 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch()
   const { ingredients, bun } = useSelector(state => state.burgerConstructor)
   let total = 0
-  ingredients?.map(elem => total += elem.price)
-  total +=  bun.price * 2
+  if (bun !== undefined && ingredients.length > 0) {
+    ingredients?.map(elem => total += elem.price)
+    total +=  bun.price * 2
+  } else {
+    total = 0
+  }
   const [isHidden, setHidden] = useState(true)
   const handleClose = () => {
     setHidden(true)
@@ -83,25 +87,27 @@ export default function BurgerConstructor() {
       })
 
   }
-
   const handlePostOrder = () => {
-    const dataRequest = JSON.stringify({ingredients: ingredients.map((ingredient) => ingredient._id).concat(bun._id)})
+    const dataRequest = { ingredients: [ bun._id , ...ingredients.map((ingredient) => ingredient._id) , bun._id ]}
     dispatch(postOrder(dataRequest))
   }
+
   return (
     <section ref={drop} className={ isOver ? `${style.borderAccent} + pt-15` : 'pt-15'}>
       <section className={`${style.containerConstructor} + pl-8 pb-4`}>
-        <ConstructorElement
+        {Object.keys(bun).length === 0 ? (<span className={`${style.startSectionBun} + text text_color_primary`} > Add bun in your burger </span>) :
+          (<ConstructorElement
           type="top"
           isLocked
           text={bun?.name + '(верх)'}
           price={bun?.price}
           thumbnail={bun?.image}
-        />
+        />)}
       </section>
       <div className={`${style.containerConstructor}`}>
         <div className={`${style.containerConstructorInside}`}>
-          { ingredients?.map((elem, index) =>
+          {(ingredients.length === 0) ? (<span className={`${style.startSectionIngredient} + text text_color_primary`}> Add ingredient in your burger </span>) :
+            ingredients?.map((elem, index) =>
             <ConstructorCard
               elem={elem}
               index={index}
@@ -111,13 +117,14 @@ export default function BurgerConstructor() {
         </div>
       </div>
         <section className={`${style.containerConstructor} + pl-8 mt-4`} >
-          <ConstructorElement
+          {Object.keys(bun).length === 0 ? (<span className={`${style.startSectionBun} + text text_color_primary`} > Add bun in your burger </span>) :
+            <ConstructorElement
             type="bottom"
             isLocked
             text={bun?.name + '(низ)'}
             price={bun?.price}
             thumbnail={bun?.image}
-          />
+          />}
         </section>
       <div className={`${style.containerConstructorFinal} + pt-10 pb-10 pl-4 pr-4`}>
         <div className={`pr-10`}>

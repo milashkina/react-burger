@@ -2,10 +2,10 @@ import style from "../burger-constructor/burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useRef} from "react";
 import {useDrag, useDrop} from "react-dnd";
-import {DND_TYPES} from "../../utils/constant";
+import {DND_TYPES, INGREDIENT_PROP_TYPES} from "../../utils/constant";
 import {useDispatch} from "react-redux";
 import {SORT_CARD} from "../../services/actions/burger-constructor";
-import {nanoid} from "nanoid/non-secure";
+import PropTypes from "prop-types";
 
 
 export const ConstructorCard = ({elem, index, deleteIngredientFromConstructor }) => {
@@ -69,9 +69,11 @@ export const ConstructorCard = ({elem, index, deleteIngredientFromConstructor })
   })
 
   const opacity = isDragging ? 0 : 1
+
   drag(drop(ref))
+
   return (
-    <div key={nanoid()} ref={ref} className={`${style.wrapperConstructor}`} style={{ opacity }}>
+    <div ref={ref} className={`${style.wrapperConstructor}`} style={{ opacity }}>
       <div>
         <DragIcon type="primary"/>
       </div>
@@ -83,4 +85,10 @@ export const ConstructorCard = ({elem, index, deleteIngredientFromConstructor })
       />
     </div>
   )
+}
+
+ConstructorCard.propTypes = {
+  elem: INGREDIENT_PROP_TYPES,
+  index: PropTypes.number.isRequired,
+  deleteIngredientFromConstructor: PropTypes.func.isRequired
 }

@@ -23,3 +23,6 @@
     align-items: center;
     text-decoration: none;
 }
+.colorPrimaryWhite {
+    color: var(--text-primary-light);
+}

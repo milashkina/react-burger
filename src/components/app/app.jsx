@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import style from '../App/app.module.css'
-import AppHeader from "../app-header/AppHeader";
-import BurgerIngredients from "../burger-ingredients/Burger-ingredients";
-import BurgerConstructor from "../burger-constructor/Burger-constructor";
+import style from './/app.module.css'
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import {useDispatch, useSelector} from "react-redux";
 import {CLOSE_INGREDIENT_DETAILS_MODAL, UNSELECT_INGREDIENT} from "../../services/actions/details";
 import {selectIngredient} from '../../services/reducers/details'

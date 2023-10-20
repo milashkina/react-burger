@@ -24,7 +24,6 @@ export function postOrder(data) {
     });
     usePostOrder(data)
       .then((res) => {
-        console.log(res)
         dispatch({
           type: POST_ORDER_SUCCESS,
           isSuccess: true,

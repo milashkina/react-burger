@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./burger-ingredients.module.css";
+import style from "../burger-ingredients/burger-ingredients.module.css";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useSelector} from "react-redux";
 import {INGREDIENTS_TITLES} from "../../utils/constant";

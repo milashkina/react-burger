@@ -1,4 +1,4 @@
-import Tabs from './Tab'
+import Tabs from '../tab-ingredients/tab-ingredients'
 import React, {useMemo} from "react";
 import style from './burger-ingredients.module.css'
 import ProductList from "../product-list/product-list";

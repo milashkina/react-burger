@@ -1,11 +1,10 @@
-import {BUN_BY_DEFAULT} from "../../utils/constant";
 import { ADD_INGREDIENT, DELETE_INGREDIENT, INITIAL_BUN, CHANGE_BUN, SORT_CARD } from "../actions/burger-constructor";
 
 
 
 const initialState = {
   ingredients: [],
-  bun: BUN_BY_DEFAULT
+  bun: {}
 }
 
 
@@ -18,7 +17,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       }
     }
     case INITIAL_BUN: {
-      console.log('i am try add the same bun')
       return {
         ...state
       }

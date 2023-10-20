@@ -1,28 +1,11 @@
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import {BUN_BY_DEFAULT, DND_TYPES} from "../../utils/constant";
+import {DND_TYPES} from "../../utils/constant";
 import {useDrag} from "react-dnd";
-import style from '../App/app.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {DEFAULT_BUN} from "../../services/actions/burger-constructor";
+import style from '../app/app.module.css'
 export function IngredientCard({ingredient, onSelect}) {
   const {image, name, price, id, quantity} = ingredient
-  const dispatch = useDispatch()
-  const {ingredientsFailed} = useSelector(state => state.burgerIngredients)
-
-  useEffect(() => {
-    if (!ingredientsFailed) {
-      if(ingredient._id === BUN_BY_DEFAULT._id) {
-        dispatch({
-          type: DEFAULT_BUN,
-          bun: ingredient
-        })
-      }
-    }
-  }, []);
-
-
   const [ { isDragging },dragRef] = useDrag({
     type: DND_TYPES.ADD_INGREDIENT,
     item: ingredient,

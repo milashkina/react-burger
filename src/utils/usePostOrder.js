@@ -10,7 +10,7 @@ export async function usePostOrder(data) {
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
-    body: data,
+    body: JSON.stringify(data),
   })
   return checkRes(res);
 }
