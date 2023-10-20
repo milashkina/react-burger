@@ -77,8 +77,7 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
           } else {
             return ingredient;
           }
-        }),
-        bun: { ...action.bun },
+        })
       }
     }
     case DEFAULT_BUN: {
