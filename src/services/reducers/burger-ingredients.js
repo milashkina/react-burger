@@ -72,16 +72,13 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         ...state,
         ingredients: [...state.ingredients].map(ingredient => {
           if (ingredient.type === 'bun') {
-            if (ingredient._id === action._id) {
-              return {...ingredient, quantity: 2 };
-            } else {
-              return {...ingredient, quantity: 0};
-            }
+            const quantity = ingredient._id === action._id ? 2 : 0
+            return {...ingredient, quantity }
           } else {
             return ingredient;
           }
         }),
-        bun: { ...action.bun, quantity: action.bun.quantity += 2},
+        bun: { ...action.bun },
       }
     }
     case DEFAULT_BUN: {
