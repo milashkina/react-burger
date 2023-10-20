@@ -20,7 +20,7 @@ export const Modal = (props) => {
     return (() => {
       document.removeEventListener('keydown', btnEsc)
     })
-  }, [])
+  }, []) // eslint-disable-line
 
 
     return createPortal(
@@ -47,6 +47,5 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   header: PropTypes.string,
   children: PropTypes.element,
-
 }
 
