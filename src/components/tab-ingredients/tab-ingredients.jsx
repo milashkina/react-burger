@@ -6,6 +6,7 @@ import {INGREDIENTS_TITLES} from "../../utils/constant";
 import PropTypes from "prop-types";
 
 export default function Tabs ({onClick}) {
+  // TODO: переделать работу с табами на useState. Часто дергаем стайт редакса + нет необходимости хранить информацию в общем стейте аппа
   const current = useSelector(state => state.burgerIngredients.elem)
   return(
     <div className={`${style.flex} + pb-10`}>

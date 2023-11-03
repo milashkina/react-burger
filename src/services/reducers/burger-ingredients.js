@@ -6,7 +6,7 @@ import {
   DECREASE_COUNT, CHANGE_TAB,
 } from "../actions/burger-ingredients";
 import { INGREDIENTS_TITLES} from "../../utils/constant";
-import {useGetIngredients} from "../../utils/useGetIngredients";
+import {useGetIngredients} from "../../utils/queries/useGetIngredients";
 import {REVERSE_BUN} from "../actions/burger-ingredients";
 import {DEFAULT_BUN} from "../actions/burger-constructor";
 

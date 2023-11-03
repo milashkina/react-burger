@@ -1,0 +1,27 @@
+.profileLayout {
+    display: grid;
+    grid-template-columns: 320px 480px;
+    gap: 60px;
+    justify-content: center;
+}
+.sectionLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+.navLayout {
+    display: flex;
+    flex-direction: column;
+}
+.editLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.navCursorPointer {
+    cursor: pointer;
+}
+.navCursorPointer:hover {
+    color: var(--main-white) !important;
+    transition: color .3s ease-in;
+}
