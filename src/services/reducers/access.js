@@ -22,10 +22,10 @@ import {
 } from "../actions/access";
 import {usePostRegister} from "../../utils/queries/usePostRegister";
 import {deleteCookie, setCookie} from "../../utils/cookies";
-import {ERROR, TOKEN} from "../../utils/constant";
+import {TOKEN} from "../../utils/constant";
 import {usePostLogin} from "../../utils/queries/usePostLogin";
 import {useGetUser} from "../../utils/queries/useGetUser";
-import {usePostRefreshToken} from "../../utils/queries/usePostRefreshToken";
+import {postRefreshToken} from "../../utils/queries/postRefreshToken";
 import {usePostForgotPassword} from "../../utils/queries/usePostForgotPassword";
 import {usePostResetPassword} from "../../utils/queries/usePostResetPassword";
 import {usePostLogout} from "../../utils/queries/usePostLogout";
@@ -60,9 +60,6 @@ const initialState = {
 
   getUserRequest: false,
   getUserFailed: false,
-
-  refreshTokenRequest: false,
-  refreshTokenFailed: false,
 
   logoutRequest: false,
   logoutFailed: false,
@@ -188,29 +185,6 @@ export function getUser() {
   }
 }
 
-export function refreshToken(data) {
-  return function (dispatch) {
-    dispatch({
-      type: REFRESH_TOKEN_REQUEST
-    })
-    usePostRefreshToken(data)
-      .then( (data) => {
-        dispatch({
-          type: REFRESH_TOKEN_SUCCESS
-        })
-        deleteCookie(TOKEN.ACCESS)
-        localStorage.removeItem(TOKEN.REFRESH)
-
-        setCookie(TOKEN.ACCESS, data.accessToken.split('Bearer ')[1])
-        localStorage.setItem(TOKEN.REFRESH, data.refreshToken)
-      })
-      .catch(() => {
-        dispatch({
-          type: REFRESH_TOKEN_FAILED
-        })
-      })
-  }
-}
 
 export function patchUser(data) {
   return function(dispatch) {
@@ -397,21 +371,6 @@ export const accessReducer = (state = initialState, action) => {
         refreshTokenFailed: false,
         getUserFailed: false,
         editProfileFailed: false,
-      }
-    }
-    case REFRESH_TOKEN_SUCCESS: {
-      return {
-        ...state,
-        refreshTokenRequest: false,
-        isAuth: true
-      }
-    }
-    case REFRESH_TOKEN_FAILED: {
-      return {
-        ...state,
-        refreshTokenRequest: false,
-        refreshTokenFailed: true,
-        isAuth: false,
       }
     }
     case LOGOUT_REQUEST: {

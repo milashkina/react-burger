@@ -6,7 +6,7 @@ export const usePostOrder = (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      Authorization: 'Bearer ' + getCookie(TOKEN.ACCESS)
+      authorization: 'Bearer ' + getCookie(TOKEN.ACCESS)
     },
     body: JSON.stringify(data),
   })

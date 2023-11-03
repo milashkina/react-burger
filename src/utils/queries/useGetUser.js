@@ -8,7 +8,7 @@ export const useGetUser = (data) => {
    method: 'GET',
    headers: {
      'Content-Type': 'application/json;charset=utf-8',
-     Authorization: 'Bearer ' + getCookie(TOKEN.ACCESS)
+     authorization: 'Bearer ' + getCookie(TOKEN.ACCESS)
    },
    body: JSON.stringify(data),
  })
