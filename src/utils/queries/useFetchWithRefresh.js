@@ -1,5 +1,4 @@
 import {deleteCookie, setCookie} from "../cookies";
-import {refreshToken} from "../../services/reducers/access";
 import {ERROR, TOKEN} from "../constant";
 import {postRefreshToken} from "./postRefreshToken";
 

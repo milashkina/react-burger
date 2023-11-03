@@ -1,8 +1,8 @@
 import globalStyle from "../../components/app/app.module.css";
 import {Button,  Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {redirect, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {postResetPassword} from "../../services/reducers/access";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -10,8 +10,6 @@ import {useDispatch, useSelector} from "react-redux";
 export function ResetPasswordPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const location = useLocation()
-  const isSuccess = useSelector(state => state.access.resetPasswordSuccess)
   const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector(state => state.access)
 
   const [formValue, setFormValue] = useState({
@@ -38,23 +36,15 @@ export function ResetPasswordPage() {
     dispatch(postResetPassword(formValue))
   }
 
-/*  useEffect(() => {
-    if (isSuccess) {
+  if (resetPasswordSuccess || !forgotPasswordSuccess) {
+    return (
+      navigate(PATH.LOGIN)
+    )
+  } else if (isAuth) {
+    return (
       navigate(PATH.HOME)
-    }
-  }, [isSuccess]);*/ // eslint-disable-line
-
- // useEffect(() => {
-    if (resetPasswordSuccess || !forgotPasswordSuccess) {
-      return (
-        navigate(PATH.LOGIN)
-      )
-    } else if (isAuth) {
-      return (
-        navigate(PATH.HOME)
-      )
-    }
- // }, [forgotPasswordSuccess, isAuth, resetPasswordSuccess]) // eslint-disable-line
+    )
+  }
 
   return(
     <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={(e) => onSubmit(e)}>

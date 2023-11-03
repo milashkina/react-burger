@@ -1,8 +1,7 @@
 import style from '../ingredient-details/ingredient-details.module.css'
-import globalStyle from '../app/app.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {useCallback, useEffect} from "react";
+import {useEffect} from "react";
 import {getIngredients} from "../../services/reducers/burger-ingredients";
 
 export default function IngredientDetails() {

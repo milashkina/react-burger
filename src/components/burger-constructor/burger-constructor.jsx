@@ -1,6 +1,6 @@
 import style from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Modal} from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,8 +18,7 @@ import {
 import {ConstructorCard} from "../constructor-card/constructor-card";
 import {nanoid} from "nanoid/non-secure";
 import {postOrder} from "../../services/reducers/order-info";
-import {Navigate, redirect, useNavigate} from "react-router-dom";
-import {getUser} from "../../services/reducers/access";
+import {useNavigate} from "react-router-dom";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch()

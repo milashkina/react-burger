@@ -13,9 +13,7 @@ import {
   LOGOUT_FAILED,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  REFRESH_TOKEN_FAILED,
-  REFRESH_TOKEN_REQUEST,
-  REFRESH_TOKEN_SUCCESS, REGISTER_FORM_SUBMIT, REGISTER_FORM_SUBMIT_FAILED, REGISTER_FORM_SUBMIT_SUCCESS,
+  REGISTER_FORM_SUBMIT, REGISTER_FORM_SUBMIT_FAILED, REGISTER_FORM_SUBMIT_SUCCESS,
   RESET_PASSWORD_FORM_SUBMIT,
   RESET_PASSWORD_FORM_SUBMIT_FAILED,
   RESET_PASSWORD_FORM_SUBMIT_SUCCESS
@@ -362,15 +360,6 @@ export const accessReducer = (state = initialState, action) => {
         getUserRequest: false,
         getUserFailed: true,
         isAuth: false,
-      }
-    }
-    case REFRESH_TOKEN_REQUEST: {
-      return {
-        ...state,
-        refreshTokenRequest: true,
-        refreshTokenFailed: false,
-        getUserFailed: false,
-        editProfileFailed: false,
       }
     }
     case LOGOUT_REQUEST: {
