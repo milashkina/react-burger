@@ -93,7 +93,6 @@ export default function BurgerConstructor() {
   }
   const handlePostOrder = async () => {
     const dataRequest = { ingredients: [ bun._id , ...ingredients.map((ingredient) => ingredient._id) , bun._id ]}
-    console.log('isAuth: ', isAuth)
     if (isAuth) {
       dispatch(postOrder(dataRequest))
     } else {

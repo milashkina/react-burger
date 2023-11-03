@@ -57,7 +57,7 @@ function App() {
 
            <Route exact path={PATH.INGREDIENT} element={<IngredientDetailsPage />} />
 
-           <Route element={<NotFound404Page />} />
+           <Route path={'*'} element={<NotFound404Page />} />
          </Routes>
 
          {location?.state?.backgroundLocation && (
