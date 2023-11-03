@@ -23,7 +23,6 @@ import {deleteCookie, setCookie} from "../../utils/cookies";
 import {TOKEN} from "../../utils/constant";
 import {usePostLogin} from "../../utils/queries/usePostLogin";
 import {useGetUser} from "../../utils/queries/useGetUser";
-import {postRefreshToken} from "../../utils/queries/postRefreshToken";
 import {usePostForgotPassword} from "../../utils/queries/usePostForgotPassword";
 import {usePostResetPassword} from "../../utils/queries/usePostResetPassword";
 import {usePostLogout} from "../../utils/queries/usePostLogout";

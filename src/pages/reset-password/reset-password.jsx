@@ -1,6 +1,6 @@
 import globalStyle from "../../components/app/app.module.css";
 import {Button,  Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
 import React, {useState} from "react";
 import {postResetPassword} from "../../services/reducers/access";
