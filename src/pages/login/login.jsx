@@ -2,19 +2,20 @@ import globalStyle from "../../components/app/app.module.css";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Navigate, useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
-import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {postLogin} from "../../services/reducers/access";
+import {useForm} from "../../utils/useForm";
 
 
 export function LoginPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAuth = useSelector(state => state.access.isAuth)
-  const [ formValue, setFormValue ] = useState({
-    email: '',
-    password: '',
-  })
+  const onSubmit = () => {
+    dispatch(postLogin(formValue))
+  }
+  const [formValue, handleChange, handleSubmit] = useForm(onSubmit)
+
   const onClickRegister = () => {
     navigate(PATH.REGISTER)
   }
@@ -22,16 +23,6 @@ export function LoginPage() {
     navigate(PATH.FORGOT_PASSWORD)
   }
 
-  const onFormChange = (e) => {
-    setFormValue({
-      ...formValue,
-      [e.target.name]: e.target.value,
-    })
-  }
-  const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(postLogin(formValue))
-  }
   if (isAuth) {
     return (
       <Navigate to={PATH.HOME} replace />
@@ -39,17 +30,17 @@ export function LoginPage() {
   }
 
   return(
-    <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={(e) => onSubmit(e)}>
+    <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={handleSubmit}>
       <p className="text text_type_main-medium">Вход</p>
       <EmailInput
-        onChange={(e) => onFormChange(e)}
-        value={formValue.email}
+        onChange={handleChange}
+        value={formValue.email || ''}
         name={INPUT.NAME.EMAIL}
         isIcon={false}
       />
       <PasswordInput
-        onChange={(e) => onFormChange(e)}
-        value={formValue.password}
+        onChange={handleChange}
+        value={formValue.password || ''}
         name={INPUT.NAME.PASSWORD}
       />
       <Button htmlType="submit" type="primary" size="medium" extraClass="mb-10">

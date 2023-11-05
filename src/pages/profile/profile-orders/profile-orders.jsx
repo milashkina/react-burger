@@ -9,7 +9,6 @@ export function ProfileOrdersPage() {
       <section className={`${style.sectionLayout} `}>
         <ProfileNav />
       </section>
-      <div></div>
     </article>
   )
 }

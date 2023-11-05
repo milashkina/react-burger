@@ -5,23 +5,24 @@ import {PATH, SIZE} from "../../utils/constant";
 import globalStyle from "../../components/app/app.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {postForgotPassword} from "../../services/reducers/access";
+import {useForm} from "../../utils/useForm";
 
 
 export function ForgotPasswordPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isSuccess = useSelector(state => state.access.forgotPasswordSuccess)
-  const [formValue, setFormValue] = useState({
-    email: '',
-  })
+
+  const onSubmit = () => {
+    if (formValue.email === '') {
+      alert('Введите имейл для восстановления пароля')
+    } else {
+      dispatch(postForgotPassword(formValue))
+    }
+  }
+  const [formValue, handleChange, handleSubmit] = useForm(onSubmit)
   const onClickLogin = () => {
     navigate(PATH.LOGIN)
-  }
-  const onChangeValue = (e) => {
-    setFormValue({
-      ...formValue,
-      [e.target.name]: e.target.value,
-    })
   }
 
   useEffect(() => {
@@ -30,17 +31,12 @@ export function ForgotPasswordPage() {
     }
   }, [isSuccess]); // eslint-disable-line
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(postForgotPassword(formValue))
-  }
-
   return (
-     <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={(e) => onSubmit(e)}>
+     <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={handleSubmit}>
        <p className="text text_type_main-medium">Восстановление пароля</p>
        <EmailInput
-         onChange={(e) => onChangeValue(e)}
-         value={formValue.email}
+         onChange={handleChange}
+         value={formValue.email || ''}
          name={'email'}
          isIcon={false}
        />

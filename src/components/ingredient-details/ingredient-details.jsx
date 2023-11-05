@@ -11,10 +11,10 @@ export default function IngredientDetails() {
     dispatch(getIngredients())
   }, []); // eslint-disable-line
 
-  const ingredients = useSelector(state => state.burgerIngredients.ingredients)
+  const {ingredients, isSuccess} = useSelector(state => state.burgerIngredients)
   const { id } = useParams()
   let selectedIngredient = {}
-  if (ingredients !== []) {
+  if (isSuccess) {
     selectedIngredient = ingredients.filter((ingredient) => ingredient._id === id)[0]
   }
   const {image_large, name, calories, proteins, fat, carbohydrates} = selectedIngredient ?? {}

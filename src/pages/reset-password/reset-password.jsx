@@ -2,41 +2,30 @@ import globalStyle from "../../components/app/app.module.css";
 import {Button,  Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
-import React, {useState} from "react";
 import {postResetPassword} from "../../services/reducers/access";
 import {useDispatch, useSelector} from "react-redux";
+import {useForm} from "../../utils/useForm";
+import {useRef} from "react";
 
 
 export function ResetPasswordPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector(state => state.access)
-
-  const [formValue, setFormValue] = useState({
-    password: '',
-    token: '',
-  })
-  const inputRef = React.useRef(null)
-
-
+  const onSubmit = () => {
+    dispatch(postResetPassword(formValue))
+  }
+  const [formValue, handleChange, handleSubmit] = useForm(onSubmit)
+  const inputRef = useRef(null)
   const onClickLogin = () => {
     navigate(PATH.LOGIN)
   }
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
   }
-  const onChangeValue = (e) => {
-    setFormValue({
-      ...formValue,
-    [e.target.name]: e.target.value,
-    })
-  }
-  const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(postResetPassword(formValue))
-  }
-
-  if (resetPasswordSuccess || !forgotPasswordSuccess) {
+  if(!forgotPasswordSuccess) {
+    navigate(PATH.FORGOT_PASSWORD)
+  } else if (resetPasswordSuccess) {
     return (
       navigate(PATH.LOGIN)
     )
@@ -47,19 +36,19 @@ export function ResetPasswordPage() {
   }
 
   return(
-    <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={(e) => onSubmit(e)}>
+    <form className={`${globalStyle.columnGrid} + mt-20`} onSubmit={handleSubmit}>
       <p className="text text_type_main-medium">Восстановление пароля</p>
       <PasswordInput
-        onChange={(e) => onChangeValue(e)}
-        value={formValue.password}
+        onChange={handleChange}
+        value={formValue.password || ''}
         placeholder={'Введите новый пароль'}
         name={'password'}
       />
       <Input
         type={'text'}
         placeholder={'Введите код из письма'}
-        onChange={(e) => onChangeValue(e)}
-        value={formValue.token}
+        onChange={handleChange}
+        value={formValue.token || ''}
         name={INPUT.NAME.CODE}
         error={false}
         ref={inputRef}

@@ -1,7 +1,7 @@
 import style from "../profile.module.css";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INPUT, SIZE} from "../../../utils/constant";
-import {useMemo, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {patchUser} from "../../../services/reducers/access";
 
@@ -10,15 +10,14 @@ export function ProfileEdit() {
   const dispatch = useDispatch()
   const inputRef = useRef(null)
   const { name, email } = useSelector(state => state.access.user)
+  // TODO: переписать с использованием хука useForm. Для этого нужно добавить в хук обработчик события handleCancel. Пока не понимаю как это сделать
   const [ formValue, setFormValue ] = useState({
     name: name,
     email: email,
     password: '',
   })
 
-  const isChange = useMemo(() => {
-    return name !== formValue.name || email !== formValue.email || formValue.password !== ''
-  }, [formValue, name, email])
+  const isChange = name !== formValue.name || email !== formValue.email || formValue.password !== ''
 
   const onFormChange = (e) => {
     setFormValue({
