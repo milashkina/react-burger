@@ -1,11 +1,11 @@
 import style from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { useState} from "react";
+import React, {useState} from "react";
 import {Modal} from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
-import {DND_TYPES} from "../../utils/constant";
+import {DND_TYPES, PATH} from "../../utils/constant";
 import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT, CHANGE_BUN,
@@ -18,9 +18,12 @@ import {
 import {ConstructorCard} from "../constructor-card/constructor-card";
 import {nanoid} from "nanoid/non-secure";
 import {postOrder} from "../../services/reducers/order-info";
+import {useNavigate} from "react-router-dom";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch()
+  const isAuth = useSelector(state => state.access.isAuth)
+  const navigate = useNavigate()
   const { ingredients, bun } = useSelector(state => state.burgerConstructor)
   let total = 0
   if (bun !== undefined && ingredients.length > 0) {
@@ -87,9 +90,13 @@ export default function BurgerConstructor() {
       })
 
   }
-  const handlePostOrder = () => {
+  const handlePostOrder = async () => {
     const dataRequest = { ingredients: [ bun._id , ...ingredients.map((ingredient) => ingredient._id) , bun._id ]}
-    dispatch(postOrder(dataRequest))
+    if (isAuth) {
+      dispatch(postOrder(dataRequest))
+    } else {
+      navigate(PATH.LOGIN)
+    }
   }
 
   return (

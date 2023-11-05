@@ -11,6 +11,10 @@
     --main-pink: #E33CD5;
 }
 
+a {
+    text-decoration: none;
+}
+
 .flexContainer {
     display: flex;
     flex-direction: row;
@@ -18,6 +22,36 @@
     align-items: flex-start;
     gap: 40px;
 }
-.borderAccent > span {
+.colorAccent > span,
+.colorAccent > div > span {
     color: var(--interface-accent);
 }
+.columnGrid {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap:24px;
+    justify-content: flex-start;
+}
+.formTipContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+}
+.IngredientCardLayout {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+    position: relative;
+}
+.IngredientCardLayout > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+}
+
+

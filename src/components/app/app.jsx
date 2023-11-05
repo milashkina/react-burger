@@ -1,60 +1,80 @@
 import React, { useEffect } from 'react';
-import style from './/app.module.css'
 import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
 import {useDispatch, useSelector} from "react-redux";
-import {CLOSE_INGREDIENT_DETAILS_MODAL, UNSELECT_INGREDIENT} from "../../services/actions/details";
 import {selectIngredient} from '../../services/reducers/details'
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import {Modal} from "../modal/modal";
 import {getIngredients} from "../../services/reducers/burger-ingredients";
 import {CLOSE_ORDER_INFO_MODAL} from "../../services/actions/order-info";
+import {Route, Routes, useLocation, useNavigate} from 'react-router-dom'
+import {HomePage} from "../../pages/home/home";
+import {PATH} from "../../utils/constant";
+import {
+  ForgotPasswordPage, IngredientDetailsPage,
+  LoginPage,
+  ProfileOrdersPage,
+  ProfilePage,
+  RegisterPage,
+  ResetPasswordPage, NotFound404Page
+} from "../../pages/export-pages";
+import {ProtectedRouteElement} from "../../utils/protected-route";
+import {getUser} from "../../services/reducers/access";
 
 function App() {
 
   const dispatch = useDispatch();
-
-  const ingredientDetailsModal = useSelector(state => state.ingredientDetails.modalIsOpen);
+  const location = useLocation()
+  const navigate = useNavigate()
   const orderInfoModal = useSelector(state => state.orderInfo.modalIsOpen)
+
   const handleCloseOrderDetails = () => {
     dispatch({
       type: CLOSE_ORDER_INFO_MODAL
     })
   }
 
-  function handleClose() {
-    dispatch({
-      type: CLOSE_INGREDIENT_DETAILS_MODAL
-    });
-    dispatch({
-      type: UNSELECT_INGREDIENT
-    });
-  }
   useEffect(() => {
     dispatch(getIngredients())
+    dispatch(getUser())
   }, [dispatch]);
 
   return (
-     <div className="App">
-      <AppHeader />
-      <main className={`${style.flexContainer} + pt-10`}>
-        <BurgerIngredients />
-        <BurgerConstructor/>
-      </main>
-       {
-         ingredientDetailsModal && (
-           <Modal onClose={handleClose} header="Детали ингредиента">
-             <IngredientDetails data={selectIngredient}/>
-           </Modal>
-         )
-       }
-       {orderInfoModal &&
-         <Modal onClose={handleCloseOrderDetails}>
-           <OrderDetails />
-         </Modal>}
-    </div>
+     <>
+       <AppHeader />
+
+         <Routes location={location?.state?.backgroundLocation || location}>
+           <Route exact index path={PATH.HOME} element={<HomePage />} />
+
+           <Route exact path={PATH.LOGIN} element={<ProtectedRouteElement onlyUnAuth element={<LoginPage />} />}  />
+           <Route exact path={PATH.REGISTER} element={<ProtectedRouteElement onlyUnAuth element={<RegisterPage />} />}  />
+
+           <Route exact path={PATH.FORGOT_PASSWORD} element={<ProtectedRouteElement onlyUnAuth element={<ForgotPasswordPage />} />}  />
+           <Route exact path={PATH.RESET_PASSWORD} element={<ProtectedRouteElement onlyUnAuth element={<ResetPasswordPage />} />} />
+
+           <Route exact path={PATH.PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} />} />
+           <Route exact path={PATH.PROFILE_ORDERS} element={<ProtectedRouteElement element={<ProfileOrdersPage />} />} />
+
+           <Route exact path={PATH.INGREDIENT} element={<IngredientDetailsPage />} />
+
+           <Route path={'*'} element={<NotFound404Page />} />
+         </Routes>
+
+         {location?.state?.backgroundLocation && (
+           <Routes>
+             <Route path={PATH.INGREDIENT} element={
+               <Modal onClose={() => navigate(-1)} header="Детали ингредиента">
+                 <IngredientDetails data={selectIngredient}/>
+               </Modal>
+             } />
+           </Routes>
+           )
+         }
+         {orderInfoModal &&
+           <Modal onClose={handleCloseOrderDetails}>
+             <OrderDetails />
+           </Modal>}
+    </>
   );
 }
 

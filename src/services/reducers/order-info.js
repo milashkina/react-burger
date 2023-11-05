@@ -6,7 +6,7 @@ import {
   POST_ORDER_REQUEST,
   POST_ORDER_SUCCESS
 } from "../actions/order-info";
-import {usePostOrder} from "../../utils/usePostOrder";
+import {usePostOrder} from "../../utils/queries/usePostOrder";
 
 
 const initialState = {
@@ -22,6 +22,9 @@ export function postOrder(data) {
     dispatch({
       type: POST_ORDER_REQUEST,
     });
+    dispatch({
+      type: OPEN_ORDER_INFO_MODAL,
+    })
     usePostOrder(data)
       .then((res) => {
         dispatch({
@@ -29,9 +32,6 @@ export function postOrder(data) {
           isSuccess: true,
           orderId: res.order.number,
           name: res.name,
-        })
-        dispatch({
-          type: OPEN_ORDER_INFO_MODAL,
         })
       })
       .catch(() => {
@@ -54,7 +54,7 @@ export const orderInfoReducer = (state = initialState, action) => {
     case POST_ORDER_SUCCESS: {
       return {
         ...state,
-        isSuccess: action.success,
+        isSuccess: true,
         OrderRequest: false,
         orderId: action.orderId,
         name: action.name,
@@ -63,7 +63,7 @@ export const orderInfoReducer = (state = initialState, action) => {
     case POST_ORDER_FAILED: {
       return {
         ...state,
-        isSuccess: action.success,
+        isSuccess: false,
         OrderRequest: false,
       }
     }

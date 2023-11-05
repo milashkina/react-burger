@@ -5,7 +5,7 @@ import {createPortal} from "react-dom";
 import {useEffect} from "react";
 import PropTypes from "prop-types";
 
-const modalRoot = document.getElementById("react-modals");
+const modalRoot  = document.getElementById("react-modals");
 
 export const Modal = (props) => {
 
@@ -44,7 +44,7 @@ export const Modal = (props) => {
 }
 
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+ // onClose: PropTypes.func.isRequired,
   header: PropTypes.string,
   children: PropTypes.element,
 }

@@ -10,7 +10,7 @@ import {CHANGE_TAB} from "../../services/actions/burger-ingredients";
 export default function BurgerIngredients() {
 
   const dispatch = useDispatch()
-  const {ingredients} = useSelector(state => state.burgerIngredients);
+  const {ingredients} = useSelector(state => state.burgerIngredients) ?? [];
 
   const bunArr = React.useMemo(() =>
     ingredients.filter((elem) => elem.type === INGREDIENT_TYPE.BUN), [ingredients]);
@@ -78,14 +78,18 @@ export default function BurgerIngredients() {
     <section className={``}>
       <span className={`text text_type_main-large pb-5`}> Соберите бургер</span>
       <Tabs onClick={handleTabClick}/>
-      <div className={`${style.productList}`} onScroll={handleScroll}>
-        <h2 className={`text text_type_main-medium`} ref={bunRef}>{INGREDIENTS_TITLES.BUN}</h2>
-        <ProductList ingredients={bunArr} onSelect={handleIngredientCardClick}/>
-        <h2 className={`text text_type_main-medium`} ref={sauceRef}>{INGREDIENTS_TITLES.SAUCE}</h2>
-        <ProductList ingredients={sauceArr} onSelect={handleIngredientCardClick}/>
-        <h2 className={`text text_type_main-medium`} ref={mainRef}>{INGREDIENTS_TITLES.MAIN}</h2>
-        <ProductList ingredients={mainArr} onSelect={handleIngredientCardClick}/>
-      </div>
+      {ingredients.length === 0 ? (
+        <span className={`text text_type_main-large`}>Loading...</span>
+      ) : (
+        <div className={`${style.productList}`} onScroll={handleScroll}>
+          <h2 className={`text text_type_main-medium`} ref={bunRef}>{INGREDIENTS_TITLES.BUN}</h2>
+          <ProductList ingredients={bunArr} onSelect={handleIngredientCardClick}/>
+          <h2 className={`text text_type_main-medium`} ref={sauceRef}>{INGREDIENTS_TITLES.SAUCE}</h2>
+          <ProductList ingredients={sauceArr} onSelect={handleIngredientCardClick}/>
+          <h2 className={`text text_type_main-medium`} ref={mainRef}>{INGREDIENTS_TITLES.MAIN}</h2>
+          <ProductList ingredients={mainArr} onSelect={handleIngredientCardClick}/>
+        </div>
+      )}
     </section>
   )
 }
