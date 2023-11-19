@@ -5,7 +5,6 @@ import {INPUT, PATH, SIZE} from "../../utils/constant";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {postLogin, postRegister} from "../../services/reducers/access";
-import {useForm} from "../../utils/useForm";
 
 
 export const RegisterPage = () => {

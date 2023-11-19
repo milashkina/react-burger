@@ -2,7 +2,6 @@ import {deleteCookie, setCookie} from "../cookies";
 import {ERROR, TOKEN} from "../constant";
 import {postRefreshToken} from "./postRefreshToken";
 import {checkRes} from "./checkResponse";
-import {TRefreshResponse} from "../../types/types";
 
 export const fetchWithRefresh = async<T> (
     url: RequestInfo,

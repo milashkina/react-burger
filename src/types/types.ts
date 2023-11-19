@@ -1,4 +1,3 @@
-export type Nothing = Record<string, never>;
 
 export type TIngredientData = {
     _id?: string;
@@ -22,8 +21,6 @@ export type TIngredientCardData = TIngredientData & {
 export type TConstructorIngredient = TIngredientData & {
     index?: number;
 }
-
-export type TIngredients = TIngredientData[] | null
 
 export type TSize = {
     DEFAULT: 'default',
