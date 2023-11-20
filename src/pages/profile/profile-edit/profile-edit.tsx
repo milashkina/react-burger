@@ -51,13 +51,11 @@ export const ProfileEdit = () => {
         onChange={onFormChange}
         onIconClick={handleIconClick}
         ref={inputRef}
-          // @ts-ignore
         type={INPUT.TYPE.TEXT}
         placeholder={INPUT.PLACEHOLDER.NAME}
         value={formValue.name}
         name={INPUT.NAME.NAME}
         error={false}
-          // @ts-ignore
         size={SIZE.DEFAULT}
         icon={"EditIcon"}
       />

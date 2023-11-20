@@ -11,7 +11,7 @@ import {TConstructorIngredient, TIngredientData} from "../../types/types";
 interface IConstructorCard {
   elem: TIngredientData,
   index: number,
-  deleteIngredientFromConstructor: any,
+  deleteIngredientFromConstructor: (elem: TIngredientData) => void,
 }
 export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngredientFromConstructor }) => {
   const {name, price, image} = elem
@@ -23,6 +23,7 @@ export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngred
       if (!ref.current) {
         return
       }
+
       const dragIndex = item.index
       const hoverIndex = index
 
@@ -30,6 +31,7 @@ export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngred
       if (dragIndex === hoverIndex) {
         return
       }
+      if (!dragIndex) return;
 
       // Determine rectangle on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect()
@@ -49,13 +51,11 @@ export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngred
       // When dragging upwards, only move when the cursor is above 50%
 
       // Dragging downwards
-      // @ts-ignore
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
       }
 
       // Dragging upwards
-      // @ts-ignore
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return
       }

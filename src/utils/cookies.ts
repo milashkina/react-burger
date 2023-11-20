@@ -1,4 +1,11 @@
-export function setCookie(name: string, value: string, props?: any) {
+import {string} from "prop-types";
+
+export function setCookie(name: string, value: string, props?: any
+/*{
+  path?: string
+  expires?: Date | string | number
+  [propName: string]: any
+}*/) {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == 'number' && exp) {
