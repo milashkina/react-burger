@@ -1,5 +1,3 @@
-import {string} from "prop-types";
-
 export function setCookie(name: string, value: string, props?: any
 /*{
   path?: string
