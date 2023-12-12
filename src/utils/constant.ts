@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {TInput, TSize} from "../types/types";
 
 export const INGREDIENTS_TITLES : {

@@ -1,5 +1,5 @@
 import { ADD_INGREDIENT, DELETE_INGREDIENT, CHANGE_BUN, SORT_CARD } from "../constants/burger-constructor";
-import {TBun, TIngredientCardData, TIngredientData} from "../../types/types";
+import {TBun, TIngredientCardData} from "../../types/types";
 import {TConstructorAction} from "../actions/burger-constructor";
 
 type TState = {

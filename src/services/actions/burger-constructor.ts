@@ -1,5 +1,5 @@
 import {ADD_INGREDIENT, CHANGE_BUN, DELETE_INGREDIENT, SORT_CARD} from "../constants/burger-constructor";
-import {TBun, TIngredientCardData, TIngredientData} from "../../types/types";
+import {TBun, TIngredientCardData} from "../../types/types";
 
 export interface IChangeBun {
     readonly type: typeof CHANGE_BUN,

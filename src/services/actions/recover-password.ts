@@ -8,8 +8,8 @@ import {
 } from "../constants/recover-password";
 import {usePostForgotPassword} from "../../utils/queries/usePostForgotPassword";
 import {usePostResetPassword} from "../../utils/queries/usePostResetPassword";
-import {TForgotPasswordData, TForgotPasswordDataRequest, TResetPasswordDataRequest} from "../../types/types";
-import {AppDispatch, AppThunkAction} from "../../types";
+import {TForgotPasswordData, TResetPasswordDataRequest} from "../../types/types";
+import {AppThunkAction} from "../../types";
 
 export interface IForgotPasswordFormSubmit {
     readonly type: typeof FORGOT_PASSWORD_FORM_SUBMIT

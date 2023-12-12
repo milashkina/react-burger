@@ -6,11 +6,11 @@ import {
     REGISTER_FORM_SUBMIT_FAILED,
     REGISTER_FORM_SUBMIT_SUCCESS
 } from "../constants/entries";
-import {TFormValue, TLoginData, TPostLoginResponse, TPostRegisterResponse, TUser} from "../../types/types";
+import {TFormValue, TLoginData, TPostLoginResponse} from "../../types/types";
 import {usePostLogin} from "../../utils/queries/usePostLogin";
 import {setCookie} from "../../utils/cookies";
 import {TOKEN} from "../../utils/constant";
-import {AppDispatch, AppThunkAction} from "../../types";
+import {AppThunkAction} from "../../types";
 import {usePostRegister} from "../../utils/queries/usePostRegister";
 
 export interface ILoginFormSubmit {
