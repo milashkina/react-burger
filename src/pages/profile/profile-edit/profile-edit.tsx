@@ -2,8 +2,8 @@ import style from "../profile.module.css";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INPUT, SIZE} from "../../../utils/constant";
 import React, {FormEvent, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {patchUser} from "../../../services/reducers/access";
+import {useDispatch, useSelector} from "../../../services/hook";
+import {patchUserThunk} from "../../../services/actions/user";
 
 
 export const ProfileEdit = () => {
@@ -26,8 +26,8 @@ export const ProfileEdit = () => {
   }
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch<any>(patchUser(formValue))
+    e.preventDefault();
+    dispatch(patchUserThunk(formValue))
   }
   const onCancel = (e: React.SyntheticEvent) => {
     e.preventDefault()

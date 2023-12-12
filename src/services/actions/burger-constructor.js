@@ -1,5 +1,0 @@
-export const CHANGE_BUN = 'CHANGE_BUN'
-export const DEFAULT_BUN = 'DEFAULT_BUN'
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const SORT_CARD = 'SORT_CARD'
-export const DELETE_INGREDIENT = 'DELETE_INGREDIENT'

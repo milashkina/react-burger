@@ -1,11 +1,10 @@
 import React, {FC, useEffect} from 'react';
 import { AppHeader } from "../app-header/app-header";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/hook";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import {Modal} from "../modal/modal";
-import {getIngredients} from "../../services/reducers/burger-ingredients";
-import {CLOSE_ORDER_INFO_MODAL} from "../../services/actions/order-info";
+import {getIngredientsThunk} from "../../services/actions/burger-ingredients";
 import {Route, Routes, useLocation, useNavigate, Location} from 'react-router-dom'
 import {HomePage} from "../../pages/home/home";
 import {PATH} from "../../utils/constant";
@@ -18,7 +17,12 @@ import {
   ResetPasswordPage, NotFound404Page
 } from "../../pages/export-pages";
 import {ProtectedRouteElement} from "../../utils/protected-route";
-import {getUser} from "../../services/reducers/access";
+import {getUserThunk} from "../../services/actions/user";
+import {closeOrderInfoModal} from "../../services/actions/order-info";
+import {FeedPage} from "../../pages/feed/feed";
+import {OrderIdFeedPage} from "../../pages/order-id-feed/order-id-feed";
+import {OrderCard} from "../order-card/order-card";
+import {unselectOrderAction} from "../../services/actions/feed";
 
 export const App: FC = () => {
 
@@ -31,17 +35,19 @@ export const App: FC = () => {
   const orderInfoModal = useSelector((state: any) => state.orderInfo.modalIsOpen)
 
   function handleCloseOrderDetails(): void {
-    dispatch({
-      type: CLOSE_ORDER_INFO_MODAL
-    })
+    dispatch(closeOrderInfoModal())
   }
   function handleCloseIngredientInfo(): void {
     navigate(-1)
   }
+  function handleCloseOrderFeedInfo(): void {
+    navigate(-1)
+    dispatch(unselectOrderAction())
+  }
 
   useEffect(() => {
-    dispatch<any>(getIngredients())
-    dispatch<any>(getUser())
+    dispatch(getIngredientsThunk())
+    dispatch(getUserThunk())
   }, [dispatch]);
 
   return (
@@ -59,11 +65,36 @@ export const App: FC = () => {
 
            <Route path={PATH.PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} />} />
            <Route path={PATH.PROFILE_ORDERS} element={<ProtectedRouteElement element={<ProfileOrdersPage />} />} />
+           <Route path={PATH.ORDER} element={<ProtectedRouteElement element={<OrderIdFeedPage />} />} />
 
            <Route path={PATH.INGREDIENT} element={<IngredientDetailsPage />} />
 
+           <Route path={PATH.FEED} element={<FeedPage />} />
+           <Route path={PATH.FEED_ID} element={<OrderIdFeedPage />} />
            <Route path={'*'} element={<NotFound404Page />} />
          </Routes>
+       {background && (
+           <Routes>
+             <Route
+                 path={PATH.ORDER}
+                 element={
+                   <Modal onClose={handleCloseOrderFeedInfo}>
+                     <OrderCard/>
+                   </Modal>
+                 } />
+           </Routes>
+       )}
+         {background && (
+             <Routes>
+               <Route
+                   path={PATH.FEED_ID}
+                   element={
+                     <Modal onClose={handleCloseOrderFeedInfo}>
+                       <OrderCard/>
+                     </Modal>
+                   } />
+             </Routes>
+         )}
 
          {background && (
            <Routes>

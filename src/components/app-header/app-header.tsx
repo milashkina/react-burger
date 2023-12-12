@@ -16,9 +16,13 @@ export const AppHeader: FC = () => {
             </>
           )}
         </NavLink>
-        <NavLink to={'#'} className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
-          <div className={`${style.container} + mr-2`} ><ListIcon type="secondary" /></div>
-          Лента заказов
+        <NavLink to={PATH.FEED} className={`${style.container} + p-2 text text_type_main-default text_color_inactive`}>
+            {({isActive}) => (
+                <>
+                    <div className={`${style.container} + mr-2`} ><ListIcon type={isActive ? "primary" : "secondary"} /></div>
+                    <span className={`text text_type_main-default ${isActive ? 'text_color_primary' : 'text_color_inactive'}`}>Лента заказов</span>
+                </>
+            )}
         </NavLink>
       </nav>
       <div>

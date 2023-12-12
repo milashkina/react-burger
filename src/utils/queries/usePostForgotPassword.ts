@@ -1,8 +1,8 @@
 import {ENDPOINT, NORMA_URL} from "../constant";
 import {checkRes} from "./checkResponse";
-import {TForgotPasswordDataRequest} from "../../types/types";
+import {TForgotPasswordData, TForgotPasswordDataRequest} from "../../types/types";
 
-export async function usePostForgotPassword(data: TForgotPasswordDataRequest) {
+export async function usePostForgotPassword(data: TForgotPasswordData ): Promise<TForgotPasswordDataRequest> {
   const res = await fetch(`${NORMA_URL}${ENDPOINT.FORGOT_PASSWORD}`, {
     method: 'POST',
     headers: {

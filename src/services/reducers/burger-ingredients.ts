@@ -3,41 +3,28 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
   INCREASE_COUNT,
-  DECREASE_COUNT, CHANGE_TAB,
-} from "../actions/burger-ingredients";
+  DECREASE_COUNT,
+} from "../constants/burger-ingredients";
 import { INGREDIENTS_TITLES} from "../../utils/constant";
-import {useGetIngredients} from "../../utils/queries/useGetIngredients";
-import {REVERSE_BUN} from "../actions/burger-ingredients";
-import {DEFAULT_BUN} from "../actions/burger-constructor";
+import {REVERSE_BUN} from "../constants/burger-ingredients";
+import {TIngredientCardData,} from "../../types/types";
+import {TIngredientsAction} from "../actions/burger-ingredients";
 
-const initialState = {
+type TState = {
+  ingredients: TIngredientCardData[] ,
+  ingredientsRequest: boolean,
+  isSuccess: boolean,
+  elem: string,
+}
+const initialState: TState = {
   ingredients: [],
   ingredientsRequest: false,
   isSuccess: false,
   elem: INGREDIENTS_TITLES.BUN,
 };
 
-export function getIngredients() {
-  return function (dispatch) {
-    dispatch({
-      type: GET_INGREDIENTS_REQUEST,
-    });
-    useGetIngredients()
-      .then((res) => {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          ingredients: res.data.map(ingredient => ({ ...ingredient, quantity: 0 })),
-        })
-      })
-      .catch(() => {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED,
-        })
-      })
-  }
-}
 
-export const burgerIngredientsReducer = (state = initialState, action) => {
+export const burgerIngredientsReducer = (state: TState = initialState, action: TIngredientsAction): TState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -61,30 +48,16 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         ingredients: [],
       }
     }
-    case CHANGE_TAB: {
-      return {
-        ...state,
-        elem: action.elem,
-      }
-    }
     case REVERSE_BUN: {
       return {
         ...state,
         ingredients: [...state.ingredients].map(ingredient => {
           if (ingredient.type === 'bun') {
-            const quantity = ingredient._id === action._id ? 2 : 0
+            const quantity: 0 | 2 = ingredient._id === action._id ? 2 : 0
             return {...ingredient, quantity }
           } else {
             return ingredient;
           }
-        })
-      }
-    }
-    case DEFAULT_BUN: {
-      return {
-        ...state,
-        ingredients: [...state.ingredients].map(ingredient => {
-          return ingredient._id === action.bun._id ? { ...ingredient, quantity: ingredient.quantity+= 2 } : ingredient
         })
       }
     }

@@ -2,7 +2,7 @@ import style from "../profile.module.css";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../../utils/constant";
 import React from "react";
-import {postLogout} from "../../../services/reducers/access";
+import {postLogoutThunk} from "../../../services/actions/logout";
 import {useDispatch} from "react-redux";
 
 
@@ -10,7 +10,7 @@ export const ProfileNav = () => {
 
   const dispatch = useDispatch()
   const logOut = () => {
-    dispatch<any>(postLogout())
+    dispatch<any>(postLogoutThunk())
   }
 
   return (

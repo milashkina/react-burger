@@ -1,49 +1,28 @@
-import {number, string} from "prop-types";
 import {
   CLOSE_ORDER_INFO_MODAL,
   OPEN_ORDER_INFO_MODAL,
   POST_ORDER_FAILED,
   POST_ORDER_REQUEST,
   POST_ORDER_SUCCESS
-} from "../actions/order-info";
-import {usePostOrder} from "../../utils/queries/usePostOrder";
+} from "../constants/order-info";
+import {TOrderInfoAction} from "../actions/order-info";
 
-
-const initialState = {
-  orderId: number,
+type TState = {
+  orderId: number | null,
   name: string,
+  OrderRequest: boolean,
+  isSuccess: boolean,
+  modalIsOpen: boolean,
+}
+const initialState: TState = {
+  orderId: null,
+  name: '',
   OrderRequest: false,
   isSuccess: false,
   modalIsOpen: false,
 }
 
-export function postOrder(data) {
-  return function (dispatch) {
-    dispatch({
-      type: POST_ORDER_REQUEST,
-    });
-    dispatch({
-      type: OPEN_ORDER_INFO_MODAL,
-    })
-    usePostOrder(data)
-      .then((res) => {
-        dispatch({
-          type: POST_ORDER_SUCCESS,
-          isSuccess: true,
-          orderId: res.order.number,
-          name: res.name,
-        })
-      })
-      .catch(() => {
-        dispatch({
-          type: POST_ORDER_FAILED,
-          isSuccess: false,
-        })
-      })
-  }
-}
-
-export const orderInfoReducer = (state = initialState, action) => {
+export const orderInfoReducer = (state: TState = initialState, action: TOrderInfoAction): TState => {
   switch(action.type) {
     case POST_ORDER_REQUEST: {
       return {
@@ -56,7 +35,7 @@ export const orderInfoReducer = (state = initialState, action) => {
         ...state,
         isSuccess: true,
         OrderRequest: false,
-        orderId: action.orderId,
+        orderId: action.order,
         name: action.name,
       };
     }

@@ -1,17 +1,20 @@
 import { Tabs } from '../tab-ingredients/tab-ingredients'
-import React, {FC, SyntheticEvent, useMemo} from "react";
+import React, {FC, SyntheticEvent, useEffect, useMemo, useState} from "react";
 import style from './burger-ingredients.module.css'
 import { ProductList } from "../product-list/product-list";
 import {useDispatch, useSelector} from "react-redux";
-import {OPEN_INGREDIENT_DETAILS_MODAL} from "../../services/actions/details";
 import {selectIngredient} from '../../services/reducers/details'
 import {INGREDIENT_TYPE, INGREDIENTS_TITLES} from "../../utils/constant";
-import {CHANGE_TAB} from "../../services/actions/burger-ingredients";
 import {TIngredientCardData} from "../../types/types";
+import {openIngredientDetailsModal} from "../../services/actions/details";
 export const BurgerIngredients: FC = () => {
 
   const dispatch = useDispatch()
   const {ingredients} = useSelector((state: any) => state.burgerIngredients) ?? [];
+
+  useEffect(() => {
+    localStorage.setItem('current', INGREDIENTS_TITLES.BUN)
+  },[]);
 
   const bunArr = React.useMemo(() =>
     ingredients.filter((elem: TIngredientCardData) => elem.type === INGREDIENT_TYPE.BUN), [ingredients]);
@@ -20,37 +23,40 @@ export const BurgerIngredients: FC = () => {
   const sauceArr = useMemo(() =>
     ingredients.filter((elem: TIngredientCardData) => elem.type === INGREDIENT_TYPE.SAUCE), [ingredients])
 
-  const bunRef = React.useRef<HTMLParagraphElement>(null);
-  const sauceRef = React.useRef<HTMLParagraphElement>(null);
-  const mainRef = React.useRef<HTMLParagraphElement>(null);
+  const bunRef = React.useRef<any>(null);
+  const sauceRef = React.useRef<any>(null);
+  const mainRef = React.useRef<any>(null);
 
+  const [activeTab, setActiveTab] = useState(bunRef)
   function handleIngredientCardClick(ingredient: TIngredientCardData): void {
-    dispatch<any>(
+    dispatch(
       selectIngredient(ingredient)
     )
-    dispatch<any>({
-      type: OPEN_INGREDIENT_DETAILS_MODAL,
-    })
+    dispatch(openIngredientDetailsModal())
   }
 
-  function handleTabClick(elem: string) {
-    dispatch<any>({
-      type: CHANGE_TAB,
-      elem,
-    })
-    switch (elem) {
+  const currentTab = (current: any): void => {
+    setActiveTab(current)
+    localStorage.setItem('current', current.current.innerHTML)
+  }
+
+  function handleTabClick(activeTab: string) {
+    switch (activeTab) {
       case INGREDIENTS_TITLES.BUN:
         if (bunRef && bunRef.current) {
+          currentTab(bunRef)
           bunRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
         }
         break;
       case INGREDIENTS_TITLES.SAUCE:
         if (sauceRef && sauceRef.current) {
-          sauceRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+          currentTab(sauceRef)
+          sauceRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
         }
         break;
       case INGREDIENTS_TITLES.MAIN:
         if (mainRef && mainRef.current) {
+          currentTab(mainRef)
           mainRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
         }
         break;
@@ -62,24 +68,15 @@ export const BurgerIngredients: FC = () => {
   function handleScroll(e: SyntheticEvent) {
     const target = e.target as HTMLDivElement
     const scrollTop = target.scrollTop;
-    if (sauceRef && sauceRef.current && bunRef && bunRef.current && mainRef && mainRef.current) {
+    if (sauceRef && sauceRef.current && bunRef && bunRef.current && mainRef && mainRef.current && activeTab) {
       const sauceScrollTop = sauceRef.current.getBoundingClientRect().top;
       const mainScrollTop = mainRef.current.getBoundingClientRect().top;
       if (scrollTop >= mainScrollTop) {
-        dispatch<any>({
-          type: CHANGE_TAB,
-          elem: INGREDIENTS_TITLES.MAIN,
-        });
+        currentTab(mainRef)
       } else if (sauceScrollTop >= scrollTop) {
-        dispatch<any>({
-          type: CHANGE_TAB,
-          elem: INGREDIENTS_TITLES.BUN,
-        });
+        currentTab(bunRef)
       } else {
-        dispatch<any>({
-          type: CHANGE_TAB,
-          elem: INGREDIENTS_TITLES.SAUCE,
-        });
+        currentTab(sauceRef)
       }
     }
   }

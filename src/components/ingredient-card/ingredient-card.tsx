@@ -5,6 +5,7 @@ import {useDrag} from "react-dnd";
 import globalStyle from '../app/app.module.css'
 import {Link, useLocation} from "react-router-dom";
 import {TIngredientCardData} from "../../types/types";
+import {useSelector} from "../../services/hook";
 
 interface IIngredientCard {
     ingredient: TIngredientCardData,
@@ -12,7 +13,9 @@ interface IIngredientCard {
 }
 export const IngredientCard: FC<IIngredientCard> = ({ingredient, onSelect }): JSX.Element => {
   const location = useLocation()
-  const {image, name, price, quantity, _id} = ingredient
+  const {image, name, price, _id} = ingredient
+  const ingredients = useSelector(state => state.burgerConstructor.ingredients)
+  const quantity = ingredients.filter(elem => elem._id === _id).length
   const [ { isDragging },dragRef] = useDrag({
     type: DND_TYPES.ADD_INGREDIENT,
     item: ingredient,

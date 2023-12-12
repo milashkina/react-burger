@@ -4,14 +4,14 @@ import React, {FC, useRef} from "react";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 import {DND_TYPES} from "../../utils/constant";
 import {useDispatch} from "react-redux";
-import {SORT_CARD} from "../../services/actions/burger-constructor";
-import {TConstructorIngredient, TIngredientData} from "../../types/types";
+import {SORT_CARD} from "../../services/constants/burger-constructor";
+import {TConstructorIngredient, TIngredientCardData} from "../../types/types";
 
 
 interface IConstructorCard {
-  elem: TIngredientData,
+  elem: TIngredientCardData,
   index: number,
-  deleteIngredientFromConstructor: (elem: TIngredientData) => void,
+  deleteIngredientFromConstructor: (elem: TIngredientCardData) => void,
 }
 export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngredientFromConstructor }) => {
   const {name, price, image} = elem

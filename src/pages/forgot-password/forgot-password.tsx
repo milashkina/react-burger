@@ -3,8 +3,10 @@ import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-compon
 import {useNavigate} from "react-router-dom";
 import {PATH, SIZE} from "../../utils/constant";
 import globalStyle from "../../components/app/app.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {postForgotPassword} from "../../services/reducers/access";
+import {useDispatch, useSelector} from "../../services/hook";
+import {postForgotPasswordThunk} from "../../services/actions/recover-password";
+
+
 
 
 export function ForgotPasswordPage() {
@@ -27,7 +29,7 @@ export function ForgotPasswordPage() {
         if ((formValue as {email: string}).email === '') {
             alert('Введите имейл для восстановления пароля')
         } else {
-            dispatch<any>(postForgotPassword(formValue))
+            dispatch(postForgotPasswordThunk(formValue))
         }
     }
       const onClickLogin = () => {

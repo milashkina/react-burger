@@ -10,7 +10,6 @@ interface IProductList {
 }
 
 export const ProductList: FC<IProductList> = ({ingredients, onSelect}): JSX.Element => {
-
   return(
     <div className={`${style.productWrapper} + pt-6 pb-10 pl-4`}>
       {

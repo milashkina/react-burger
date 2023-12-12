@@ -2,17 +2,19 @@ import globalStyle from "../../components/app/app.module.css";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Navigate, useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
-import {useDispatch, useSelector} from "react-redux";
-import {postLogin} from "../../services/reducers/access";
+import {useDispatch, useSelector} from "../../services/hook";
+import {postLoginThunk} from "../../services/actions/entries";
 import React, {useState} from "react";
 
 
 export const LoginPage = (): JSX.Element => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const isAuth = useSelector((state: any) => state.access.isAuth)
-  const onSubmit = () => {
-    dispatch<any>(postLogin(formValue))
+  const isAuth = useSelector(state => state.access.isAuth)
+  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(postLoginThunk(formValue))
+
   }
 
     const [ formValue, setFormValue ] = useState({

@@ -6,7 +6,7 @@ import {checkRes} from "./checkResponse";
 export const fetchWithRefresh = async<T> (
     url: RequestInfo,
     options: RequestInit
-) => {
+): Promise<T> => {
   try {
     const res = await fetch(url, options);
     return await checkRes<T>(res);

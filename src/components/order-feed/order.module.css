@@ -1,0 +1,49 @@
+.cardOrderLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 40px;
+    background: var(--interface-modal-bg, #1C1C21);
+    color: var(--main-white);
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.04), 0 0 2px 0 rgba(0, 0, 0, 0.06), 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+}
+.orderNumber {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.currencyLayout {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+}
+.thumbnailLayout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+}
+.thumbnailImgLayout{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+.thumbnailImgLayout > span {
+    opacity: 0.8;
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    background-color: #1C1C21;
+    text-align: center;
+    border-radius: 50%;
+}
+.thumbnailImg {
+    width: 64px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #801AB2;
+    background: #131316;
+    margin-left: -20px;
+}

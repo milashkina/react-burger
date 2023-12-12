@@ -1,8 +1,8 @@
 import {ENDPOINT, NORMA_URL} from "../constant";
 import {checkRes} from "./checkResponse";
-import {TPostLoginResponse, TUser} from "../../types/types";
+import {TLoginData, TPostLoginResponse, TUser} from "../../types/types";
 
-export async function usePostLogin(data: TUser): Promise<TPostLoginResponse> {
+export async function usePostLogin(data: TLoginData): Promise<TPostLoginResponse> {
   const res = await fetch(`${NORMA_URL}${ENDPOINT.LOGIN}`, {
     method: 'POST',
     headers: {

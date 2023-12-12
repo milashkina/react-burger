@@ -1,14 +1,19 @@
-import { ADD_INGREDIENT, DELETE_INGREDIENT, CHANGE_BUN, SORT_CARD } from "../actions/burger-constructor";
+import { ADD_INGREDIENT, DELETE_INGREDIENT, CHANGE_BUN, SORT_CARD } from "../constants/burger-constructor";
+import {TBun, TIngredientCardData, TIngredientData} from "../../types/types";
+import {TConstructorAction} from "../actions/burger-constructor";
 
+type TState = {
+  ingredients: TIngredientCardData[],
+  bun: TBun
+}
 
-
-const initialState = {
+const initialState: TState = {
   ingredients: [],
-  bun: {}
+  bun: null
 }
 
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const burgerConstructorReducer = (state : TState = initialState, action: TConstructorAction): TState => {
   switch(action.type) {
     case CHANGE_BUN: {
       return {

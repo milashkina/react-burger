@@ -1,5 +1,6 @@
 import doneImg from '../../images/done.svg'
 import style from '../order-details/order-details.module.css'
+import globalStyle from '../app/app.module.css'
 import {useSelector} from "react-redux";
 export default function OrderDetails() {
   const { orderId, isSuccess } = useSelector(state => state.orderInfo)
@@ -7,7 +8,7 @@ export default function OrderDetails() {
     <div className={`${style.contentWrapper} + p-10`}>
       {isSuccess ? (
         <div className={`${style.contentWrapper}`}>
-          <span className={` ${style.orderNumber} + text text_type_digits-large mb-8`}>{orderId}</span>
+          <span className={` ${globalStyle.orderNumber} + text text_type_digits-large mb-8`}>{orderId}</span>
           <span className={`text text_type_main-medium`}>идентификатор заказа</span>
           <img src={doneImg} alt='your order created' className={`text text_type_main-medium pt-15 pb-15`}/>
           <span className={`text text_type_main-small mb-2`}>Ваш заказ начали готовить</span>
