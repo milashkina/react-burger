@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react';
 import { AppHeader } from "../app-header/app-header";
 import {useDispatch, useSelector} from "../../services/hook";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import OrderDetails from "../order-details/order-details";
+import {OrderDetails} from "../order-details/order-details";
 import {Modal} from "../modal/modal";
 import {getIngredientsThunk} from "../../services/actions/burger-ingredients";
 import {Route, Routes, useLocation, useNavigate, Location} from 'react-router-dom'

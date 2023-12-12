@@ -23,13 +23,13 @@ export const OrderFeed: FC<TOrder> = ({order}) => {
     const orderInfo = useMemo(() => {
         if(!ingredients.length) return null;
 
-        const ingredientsInfo: any = order.ingredients.reduce((acc:any , item: TIngredientCardData) => {
+        const ingredientsInfo: TIngredientCardData[] = order.ingredients.reduce((acc:any , item: TIngredientCardData) => {
             const ingredient: TIngredientCardData | undefined = ingredients.find((ing: TIngredientCardData) => ing._id === item._id);
             if (ingredient) acc.push(ingredient);
             return acc;
         }, [])
 
-        const totalSum: number = ingredientsInfo.reduce((acc: any, item:any) => {
+        const totalSum: number = ingredientsInfo.reduce((acc, item) => {
             return acc + item.price * item.quantity;
         }, 0)
 

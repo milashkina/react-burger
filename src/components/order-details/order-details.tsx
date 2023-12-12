@@ -1,8 +1,8 @@
 import doneImg from '../../images/done.svg'
 import style from '../order-details/order-details.module.css'
 import globalStyle from '../app/app.module.css'
-import {useSelector} from "react-redux";
-export default function OrderDetails() {
+import {useSelector} from "../../services/hook";
+export const OrderDetails = () => {
   const { orderId, isSuccess } = useSelector(state => state.orderInfo)
   return(
     <div className={`${style.contentWrapper} + p-10`}>

@@ -2,7 +2,7 @@ import style from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {FC, useState} from "react";
 import {Modal} from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
+import {OrderDetails} from "../order-details/order-details";
 import {useDispatch, useSelector} from "../../services/hook";
 import {DropTargetMonitor, useDrop} from "react-dnd";
 import {DND_TYPES, PATH} from "../../utils/constant";
