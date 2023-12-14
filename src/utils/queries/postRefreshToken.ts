@@ -1,5 +1,5 @@
 import {ENDPOINT, NORMA_URL, TOKEN,} from "../constant";
-import {fetchWithRefresh} from "./useFetchWithRefresh";
+import {fetchWithRefresh} from "./fetchWithRefresh";
 import {TRefreshResponse} from "../../types/types";
 
 export const postRefreshToken = (): Promise<TRefreshResponse> => {

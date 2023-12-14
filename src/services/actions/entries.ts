@@ -6,12 +6,12 @@ import {
     REGISTER_FORM_SUBMIT_FAILED,
     REGISTER_FORM_SUBMIT_SUCCESS
 } from "../constants/entries";
-import {TFormValue, TLoginData, TPostLoginResponse} from "../../types/types";
-import {usePostLogin} from "../../utils/queries/usePostLogin";
+import {TFormValue, TLoginData, TPostLoginResponse, TPostRegisterResponse} from "../../types/types";
+import {postLogin} from "../../utils/queries/postLogin";
 import {setCookie} from "../../utils/cookies";
 import {TOKEN} from "../../utils/constant";
 import {AppThunkAction} from "../../types";
-import {usePostRegister} from "../../utils/queries/usePostRegister";
+import {postRegister} from "../../utils/queries/postRegister";
 
 export interface ILoginFormSubmit {
     readonly type: typeof LOGIN_FORM_SUBMIT,
@@ -19,7 +19,7 @@ export interface ILoginFormSubmit {
 }
 export interface  ILoginFormSubmitSuccess {
     readonly type: typeof LOGIN_FORM_SUBMIT_SUCCESS,
-    readonly user: TPostLoginResponse
+    readonly data: TPostLoginResponse
 }
 export interface  ILoginFormSubmitFailed {
     readonly type: typeof LOGIN_FORM_SUBMIT_FAILED
@@ -29,7 +29,7 @@ export interface IRegisterFormSubmit {
 }
 export interface  IRegisterFormSubmitSuccess {
     readonly type: typeof REGISTER_FORM_SUBMIT_SUCCESS,
-    readonly data: TFormValue
+    readonly data: TPostRegisterResponse
 }
 export interface  IRegisterFormSubmitFailed {
     readonly type: typeof REGISTER_FORM_SUBMIT_FAILED
@@ -45,9 +45,9 @@ export const loginRequest = (data: TLoginData): ILoginFormSubmit => ({
     data
 })
 
-export const loginRequestSuccess = (user: TPostLoginResponse): ILoginFormSubmitSuccess => ({
+export const loginRequestSuccess = (data: TPostLoginResponse): ILoginFormSubmitSuccess => ({
     type: LOGIN_FORM_SUBMIT_SUCCESS,
-    user
+    data
 })
 export const loginRequestFailed = (): ILoginFormSubmitFailed => ({
     type: LOGIN_FORM_SUBMIT_FAILED
@@ -56,7 +56,7 @@ export const loginRequestFailed = (): ILoginFormSubmitFailed => ({
 export const registerFormSubmit = (): IRegisterFormSubmit => ({
     type: REGISTER_FORM_SUBMIT
 })
-export const registerFormSubmitSuccess = (data: TFormValue): IRegisterFormSubmitSuccess => ({
+export const registerFormSubmitSuccess = (data: TPostRegisterResponse): IRegisterFormSubmitSuccess => ({
     type: REGISTER_FORM_SUBMIT_SUCCESS,
     data
 })
@@ -66,7 +66,7 @@ export const registerFormSubmitFailed = (): IRegisterFormSubmitFailed => ({
 export const postLoginThunk = (data: TLoginData): AppThunkAction<Promise<unknown>> => async (dispatch) => {
     dispatch(loginRequest(data))
     try {
-        const data_1: TPostLoginResponse = await usePostLogin(data);
+        const data_1: TPostLoginResponse = await postLogin(data);
         dispatch(loginRequestSuccess(data_1));
         setCookie(TOKEN.ACCESS, data_1.accessToken.split('Bearer ')[1]);
         localStorage.setItem(TOKEN.REFRESH, data_1.refreshToken);
@@ -77,7 +77,7 @@ export const postLoginThunk = (data: TLoginData): AppThunkAction<Promise<unknown
 export const postRegisterThunk = (data: TFormValue): AppThunkAction<Promise<unknown>> => async (dispatch) => {
     dispatch(registerFormSubmit())
     try {
-        const data_1 = await usePostRegister(data);
+        const data_1 = await postRegister(data);
         dispatch(registerFormSubmitSuccess(data_1));
         setCookie(TOKEN.ACCESS, data_1.accessToken.split('Bearer ')[1]);
         localStorage.setItem(TOKEN.REFRESH, data_1.refreshToken);

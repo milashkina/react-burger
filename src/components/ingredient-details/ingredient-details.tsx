@@ -1,18 +1,11 @@
 import style from '../ingredient-details/ingredient-details.module.css'
-import {useDispatch, useSelector} from "../../services/hook";
+import {useSelector} from "../../services/hook";
 import {useParams} from "react-router-dom";
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import {TIngredientCardData} from "../../types/types";
-import {getIngredientsThunk} from "../../services/actions/burger-ingredients";
 
 
 export const IngredientDetails: FC = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getIngredientsThunk())
-  }, []); // eslint-disable-line
-
   const {ingredients, isSuccess} = useSelector(state => state.burgerIngredients)
   const { id } = useParams<{ id?: string }>()
   const selectedIngredient = (isSuccess && Array.isArray(ingredients) && ingredients.filter((ingredient: TIngredientCardData) => ingredient._id === id)[0]) || null

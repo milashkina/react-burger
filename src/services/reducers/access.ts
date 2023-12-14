@@ -109,8 +109,8 @@ export const accessReducer = (state: TState = initialState, action: TAccessActio
         registerRequest: false,
         user: {
           ...state.user,
-          name: action.data.name,
-          email: action.data.email,
+          name: action.data.user.name,
+          email: action.data.user.email,
         },
         isAuth: true,
       }
@@ -135,8 +135,8 @@ export const accessReducer = (state: TState = initialState, action: TAccessActio
         loginRequest: false,
         user: {
           ...state.user,
-          name: action.user.name,
-          email: action.user.email,
+          name: action.data.user.name,
+          email: action.data.user.email,
         },
         isAuth: true,
       }

@@ -7,12 +7,11 @@ import {useDispatch, useSelector} from "../../services/hook";
 import {DropTargetMonitor, useDrop} from "react-dnd";
 import {DND_TYPES, PATH} from "../../utils/constant";
 import {ConstructorCard} from "../constructor-card/constructor-card";
-import {nanoid} from "nanoid/non-secure";
 import {postOrderThunk} from "../../services/actions/order-info";
 import {useNavigate} from "react-router-dom";
 import {TIngredientCardData} from "../../types/types";
 import {decreaseCount, increaseCount, reverseBun} from "../../services/actions/burger-ingredients";
-import {addIngredient, changeBun, deleteIngredient} from "../../services/actions/burger-constructor";
+import {addIngredient, changeBun, deleteIngredient, increaseBun} from "../../services/actions/burger-constructor";
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch()
@@ -21,7 +20,7 @@ export const BurgerConstructor: FC = () => {
   const { ingredients, bun } = useSelector(state => state.burgerConstructor)
   let total = 0
   if (bun !== null && ingredients.length > 0) {
-    ingredients?.map((elem: TIngredientCardData) => total += elem.price)
+    ingredients?.map((elem) => total += elem.price)
     total +=  bun.price * 2
   } else {
     total = 0
@@ -45,6 +44,7 @@ export const BurgerConstructor: FC = () => {
     if(type === 'bun') {
       dispatch(reverseBun( ingredient, ingredient._id))
       dispatch(changeBun(ingredient))
+      dispatch(increaseBun())
     } else if(ingredients.includes(ingredient)) {
       //add previous ingredient in constructor
       dispatch(increaseCount(ingredient, ingredient._id))
@@ -61,7 +61,7 @@ export const BurgerConstructor: FC = () => {
   }
   const handlePostOrder = async () => {
     if (bun !== null) {
-      const dataRequest: {ingredients: string[]} = { ingredients: [ bun._id , ...ingredients.map((ingredient: TIngredientCardData) => ingredient._id) , bun._id ]}
+      const dataRequest: {ingredients: string[]} = { ingredients: [ bun._id , ...ingredients.map((ingredient) => ingredient._id) , bun._id ]}
       if (isAuth) {
         dispatch(postOrderThunk(dataRequest))
       } else {
@@ -88,11 +88,11 @@ export const BurgerConstructor: FC = () => {
           {(ingredients.length === 0) ?
               (<span className={`${style.startSectionIngredient} + text text_color_primary`}> Add ingredient in your burger </span>)
               :
-            ingredients?.map((elem: TIngredientCardData, index: number) =>
+            ingredients?.map((elem, index) =>
             <ConstructorCard
               elem={elem}
               index={index}
-              key={nanoid()}
+              key={elem.uniqueId}
               deleteIngredientFromConstructor={deleteIngredientFromConstructor}/>
           )}
         </div>

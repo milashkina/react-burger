@@ -7,9 +7,9 @@ import {
     GET_USER_SUCCESS
 } from "../constants/user";
 import {TFormValue, TPatchUser, TUserResponse} from "../../types/types";
-import {useGetUser} from "../../utils/queries/useGetUser";
-import {usePatchUser} from "../../utils/queries/usePatchUser";
-import {AppDispatch, AppThunkAction} from "../../types";
+import {getUser} from "../../utils/queries/getUser";
+import {patchUser} from "../../utils/queries/patchUser";
+import {AppThunkAction} from "../../types";
 
 export interface IEditProfileFormSubmit {
     readonly type: typeof EDIT_PROFILE_FORM_SUBMIT
@@ -64,9 +64,9 @@ export const getUserRequestFailed = (): IGetUserRequestFailed => ({
     type: GET_USER_FAILED
 })
 
-export const getUserThunk = ():AppThunkAction => (dispatch: AppDispatch) => {
+export const getUserThunk = ():AppThunkAction => (dispatch) => {
     dispatch(getUserRequest())
-    useGetUser().then( (data: TUserResponse) => {
+    getUser().then( (data: TUserResponse) => {
         dispatch(getUserRequestSuccess(data))
     })
     .catch(() => {
@@ -75,15 +75,15 @@ export const getUserThunk = ():AppThunkAction => (dispatch: AppDispatch) => {
 }
 
 
-export const patchUserThunk = (data: TFormValue): AppThunkAction<Promise<unknown>> => (dispatch) => {
+export const patchUserThunk = (data: TFormValue): AppThunkAction<Promise<unknown>> => async (dispatch) => {
     dispatch(editProfileFormSubmit())
-    return usePatchUser(data).then((res: TPatchUser) => {
+    try {
+        const res = await patchUser(data);
         if (res && res.success) {
-            dispatch(editProfileFormSubmitSuccess(res))
+            dispatch(editProfileFormSubmitSuccess(res));
         }
-    })
-    .catch(() => {
-        dispatch(editProfileFormSubmitFailed())
-    })
+    } catch {
+        dispatch(editProfileFormSubmitFailed());
+    }
 
 }

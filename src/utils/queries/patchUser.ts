@@ -1,9 +1,9 @@
 import {ENDPOINT, NORMA_URL, TOKEN} from "../constant";
 import {getCookie} from "../cookies";
-import {fetchWithRefresh} from "./useFetchWithRefresh";
+import {fetchWithRefresh} from "./fetchWithRefresh";
 import {TFormValue, TPatchUser} from "../../types/types";
 
-export const usePatchUser = (data: TFormValue): Promise<TPatchUser> => {
+export const patchUser = (data: TFormValue): Promise<TPatchUser> => {
   return fetchWithRefresh<TPatchUser>(
     `${NORMA_URL}${ENDPOINT.USER}`, {
       method: 'PATCH',

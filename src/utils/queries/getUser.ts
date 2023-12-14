@@ -1,10 +1,10 @@
 import {ENDPOINT, NORMA_URL, TOKEN} from "../constant";
 import {getCookie} from "../cookies";
-import {fetchWithRefresh} from "./useFetchWithRefresh";
+import {fetchWithRefresh} from "./fetchWithRefresh";
 import {TUserResponse} from "../../types/types";
 
 
-export const useGetUser = (): Promise<TUserResponse> => {
+export const getUser = (): Promise<TUserResponse> => {
  return fetchWithRefresh<TUserResponse> (`${NORMA_URL}${ENDPOINT.USER}`,{
    method: 'GET',
    headers: {

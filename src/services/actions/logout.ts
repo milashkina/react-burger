@@ -1,5 +1,5 @@
 import {LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS} from "../constants/logout";
-import {usePostLogout} from "../../utils/queries/usePostLogout";
+import {postLogout} from "../../utils/queries/postLogout";
 import {deleteCookie} from "../../utils/cookies";
 import {TOKEN} from "../../utils/constant";
 import {AppDispatch, AppThunkAction} from "../../types";
@@ -32,7 +32,7 @@ export const logoutFailed = (): ILogoutFailed => ({
 
 export const postLogoutThunk = (): AppThunkAction => (dispatch: AppDispatch) => {
     dispatch(logoutRequest())
-    usePostLogout().then(() => {
+    postLogout().then(() => {
                 dispatch(logoutSuccess())
                 deleteCookie(TOKEN.ACCESS)
                 localStorage.removeItem(TOKEN.REFRESH)

@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useSelector} from "../services/hook";
 import {Navigate, useLocation} from "react-router-dom";
 import {PATH} from "./constant";
 import React, {FC, ReactElement} from "react";
@@ -9,7 +9,7 @@ interface IProtectedRoute {
 }
 
 export const ProtectedRouteElement: FC<IProtectedRoute> = ({onlyUnAuth = false, element})  => {
-  const isAuth = useSelector((state: any) => state.access.isAuth)
+  const isAuth = useSelector((state) => state.access.isAuth)
   const location = useLocation()
 
   // защита роутов LOGIN REGISTER FORGOT_PASSWORD RESET_PASSWORD от зареганных пользователей

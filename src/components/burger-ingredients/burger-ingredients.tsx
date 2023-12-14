@@ -2,7 +2,7 @@ import { Tabs } from '../tab-ingredients/tab-ingredients'
 import React, {FC, SyntheticEvent, useEffect, useMemo, useState} from "react";
 import style from './burger-ingredients.module.css'
 import { ProductList } from "../product-list/product-list";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/hook";
 import {selectIngredient} from '../../services/reducers/details'
 import {INGREDIENT_TYPE, INGREDIENTS_TITLES} from "../../utils/constant";
 import {TIngredientCardData} from "../../types/types";
@@ -10,18 +10,18 @@ import {openIngredientDetailsModal} from "../../services/actions/details";
 export const BurgerIngredients: FC = () => {
 
   const dispatch = useDispatch()
-  const {ingredients} = useSelector((state: any) => state.burgerIngredients) ?? [];
+  const {ingredients} = useSelector((state) => state.burgerIngredients) ?? [];
 
   useEffect(() => {
     localStorage.setItem('current', INGREDIENTS_TITLES.BUN)
   },[]);
 
   const bunArr = React.useMemo(() =>
-    ingredients.filter((elem: TIngredientCardData) => elem.type === INGREDIENT_TYPE.BUN), [ingredients]);
+    ingredients.filter((elem) => elem.type === INGREDIENT_TYPE.BUN), [ingredients]);
   const mainArr = useMemo(() =>
-    ingredients.filter((elem: TIngredientCardData) => elem.type === INGREDIENT_TYPE.MAIN), [ingredients])
+    ingredients.filter((elem) => elem.type === INGREDIENT_TYPE.MAIN), [ingredients])
   const sauceArr = useMemo(() =>
-    ingredients.filter((elem: TIngredientCardData) => elem.type === INGREDIENT_TYPE.SAUCE), [ingredients])
+    ingredients.filter((elem) => elem.type === INGREDIENT_TYPE.SAUCE), [ingredients])
 
   const bunRef = React.useRef<any>(null);
   const sauceRef = React.useRef<any>(null);

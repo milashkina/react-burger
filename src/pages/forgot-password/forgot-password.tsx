@@ -12,7 +12,7 @@ import {postForgotPasswordThunk} from "../../services/actions/recover-password";
 export function ForgotPasswordPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const isSuccess = useSelector((state: any) => state.access.forgotPasswordSuccess)
+    const isSuccess = useSelector((state) => state.access.forgotPasswordSuccess)
     const [ formValue, setFormValue ] = useState({
         email: '',
     })

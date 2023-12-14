@@ -8,7 +8,7 @@ import {
 } from "../constants/burger-ingredients";
 import {TBun, TIngredientCardData} from "../../types/types";
 import {AppThunkAction} from "../../types";
-import {useGetIngredients} from "../../utils/queries/useGetIngredients";
+import {getIngredients} from "../../utils/queries/getIngredients";
 
 export interface IGetIngredientsRequest {
     readonly type: typeof GET_INGREDIENTS_REQUEST
@@ -72,8 +72,8 @@ export const decreaseCount = (ingredient: TIngredientCardData, _id: string): IDe
 export const  getIngredientsThunk = (): AppThunkAction<Promise<unknown>> => async (dispatch) => {
     dispatch(getIngredientsRequest());
     try {
-        const res = await useGetIngredients();
-        const ingredients = res.data.map((ingredient: TIngredientCardData) => ({...ingredient, quantity: 0}));
+        const res = await getIngredients();
+        const ingredients = res.data.map((ingredient) => ({...ingredient, quantity: 0}));
         dispatch(getIngredientRequestSuccess(ingredients));
     } catch {
         dispatch(getIngredientsRequestFailed());

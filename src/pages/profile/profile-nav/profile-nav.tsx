@@ -3,14 +3,14 @@ import {NavLink} from "react-router-dom";
 import {PATH} from "../../../utils/constant";
 import React from "react";
 import {postLogoutThunk} from "../../../services/actions/logout";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../../services/hook";
 
 
 export const ProfileNav = () => {
 
   const dispatch = useDispatch()
   const logOut = () => {
-    dispatch<any>(postLogoutThunk())
+    dispatch(postLogoutThunk())
   }
 
   return (

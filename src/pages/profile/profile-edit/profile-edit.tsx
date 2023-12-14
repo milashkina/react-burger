@@ -1,7 +1,7 @@
 import style from "../profile.module.css";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INPUT, SIZE} from "../../../utils/constant";
-import React, {FormEvent, useRef, useState} from "react";
+import React, {FormEvent, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "../../../services/hook";
 import {patchUserThunk} from "../../../services/actions/user";
 
@@ -9,12 +9,18 @@ import {patchUserThunk} from "../../../services/actions/user";
 export const ProfileEdit = () => {
   const dispatch = useDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
-  const { name, email } = useSelector((state: any) => state.access.user)
+  const { name, email } = useSelector((state) => state.access.user)
   const [ formValue, setFormValue ] = useState({
     name: name,
     email: email,
     password: '',
   })
+
+/*  useEffect(() => {
+    if (name !== '' & email !== '') {
+
+    }
+  }, []);*/
 
   const isChange = name !== formValue.name || email !== formValue.email || formValue.password !== ''
 
@@ -47,24 +53,24 @@ export const ProfileEdit = () => {
 
   return (
     <form className={`${style.editLayout}`} onSubmit={(e) => onSubmit(e)}>
-      <Input
-        onChange={onFormChange}
-        onIconClick={handleIconClick}
-        ref={inputRef}
-        type={INPUT.TYPE.TEXT}
-        placeholder={INPUT.PLACEHOLDER.NAME}
-        value={formValue.name}
-        name={INPUT.NAME.NAME}
-        error={false}
-        size={SIZE.DEFAULT}
-        icon={"EditIcon"}
-      />
-      <EmailInput
-        onChange={onFormChange}
-        value={formValue.email}
-        name={INPUT.NAME.EMAIL}
-        isIcon={true}
-      />
+      {formValue.name && <Input
+          onChange={onFormChange}
+          onIconClick={handleIconClick}
+          ref={inputRef}
+          type={INPUT.TYPE.TEXT}
+          placeholder={INPUT.PLACEHOLDER.NAME}
+          value={formValue.name}
+          name={INPUT.NAME.NAME}
+          error={false}
+          size={SIZE.DEFAULT}
+          icon={"EditIcon"}
+      />}
+      {formValue.email && <EmailInput
+          onChange={onFormChange}
+          value={formValue.email}
+          name={INPUT.NAME.EMAIL}
+          isIcon={true}
+      />}
       <PasswordInput
         onChange={onFormChange}
         value={formValue.password}

@@ -21,7 +21,6 @@ export const fetchWithRefresh = async<T> (
 
       setCookie(TOKEN.ACCESS, refreshData.accessToken.split('Bearer ')[1])
       localStorage.setItem(TOKEN.REFRESH, refreshData.refreshToken)
-     // options.headers.authorization = refreshData.accessToken;
       if (options.headers){
         (options.headers as {[key: string]: string}).authorization =
             refreshData.accessToken

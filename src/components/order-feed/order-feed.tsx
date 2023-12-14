@@ -23,7 +23,7 @@ export const OrderFeed: FC<TOrder> = ({order}) => {
     const orderInfo = useMemo(() => {
         if(!ingredients.length) return null;
 
-        const ingredientsInfo: TIngredientCardData[] = order.ingredients.reduce((acc:any , item: TIngredientCardData) => {
+        const ingredientsInfo: TIngredientCardData[] = order.ingredients.reduce((acc:any , item) => {
             const ingredient: TIngredientCardData | undefined = ingredients.find((ing: TIngredientCardData) => ing._id === item._id);
             if (ingredient) acc.push(ingredient);
             return acc;
@@ -64,7 +64,7 @@ export const OrderFeed: FC<TOrder> = ({order}) => {
                 {pathname === PATH.PROFILE_ORDERS ? <span className={` ${globalStyle.colorSuccess} text text_type_main-default`}>{status === 'created' ? STATUS.CREATED : status === 'pending' ? STATUS.PENDING : status === 'canceled' ? STATUS.CANCELED : STATUS.DONE}</span> : ''}
                 <div className={`${style.thumbnailLayout}`}>
                     <div className={`${style.thumbnailImgLayout}`}>
-                        {orderInfo.ingredientsToShow.map((ingredient: TIngredientCardData) => (
+                        {orderInfo.ingredientsToShow.map((ingredient) => (
                             <img className={`${style.thumbnailImg} + ml-2`} src={ingredient.image} alt={ingredient.name} key={nanoid()} title={ingredient.name}/>
                         ))}
                         {orderInfo.remains && <span className={`text text_type_digits-default`}><br className={`text text_type_main-small`}/>+{orderInfo.remains}</span>}

@@ -13,7 +13,7 @@ export const ProductList: FC<IProductList> = ({ingredients, onSelect}): JSX.Elem
   return(
     <div className={`${style.productWrapper} + pt-6 pb-10 pl-4`}>
       {
-        ingredients?.map((elem: TIngredientCardData) =>
+        ingredients?.map((elem) =>
         <IngredientCard ingredient={elem} key={elem._id} onSelect={onSelect} />)
       }
     </div>

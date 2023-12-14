@@ -3,9 +3,9 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import React, {FC, useRef} from "react";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 import {DND_TYPES} from "../../utils/constant";
-import {useDispatch} from "react-redux";
-import {SORT_CARD} from "../../services/constants/burger-constructor";
+import {useDispatch} from "../../services/hook";
 import {TConstructorIngredient, TIngredientCardData} from "../../types/types";
+import {sortCard} from "../../services/actions/burger-constructor";
 
 
 interface IConstructorCard {
@@ -60,11 +60,7 @@ export const ConstructorCard: FC<IConstructorCard> = ({elem, index, deleteIngred
         return
       }
       // Time to actually perform the action
-      dispatch({
-        type: SORT_CARD,
-        dragIndex: dragIndex,
-        hoverIndex: hoverIndex,
-      })
+      dispatch(sortCard(dragIndex, hoverIndex))
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance

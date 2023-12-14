@@ -1,13 +1,17 @@
-import {ADD_INGREDIENT, CHANGE_BUN, DELETE_INGREDIENT, SORT_CARD} from "../constants/burger-constructor";
+import {ADD_INGREDIENT, CHANGE_BUN, DELETE_INGREDIENT, INCREASE_BUN, SORT_CARD} from "../constants/burger-constructor";
 import {TBun, TIngredientCardData} from "../../types/types";
+import {nanoid} from "nanoid/non-secure";
 
 export interface IChangeBun {
     readonly type: typeof CHANGE_BUN,
     readonly bun: TBun
 }
+export interface IIncreaseBun {
+    readonly type: typeof INCREASE_BUN,
+}
 export interface IAddIngredient {
     readonly type: typeof ADD_INGREDIENT,
-    readonly ingredient: TIngredientCardData
+    readonly payload: TIngredientCardData,
 }
 export interface ISortCard {
     readonly type: typeof SORT_CARD,
@@ -20,15 +24,18 @@ export interface IDeleteIngredient {
 }
 export type TConstructorAction =
     IDeleteIngredient | ISortCard |
-    IAddIngredient | IChangeBun
+    IAddIngredient | IChangeBun | IIncreaseBun
 
+export const increaseBun = (): IIncreaseBun => ({
+    type: INCREASE_BUN,
+})
 export const changeBun = (bun: TBun): IChangeBun => ({
     type: CHANGE_BUN,
     bun
 })
 export const addIngredient = (ingredient: TIngredientCardData): IAddIngredient => ({
     type: ADD_INGREDIENT,
-    ingredient
+    payload: {...ingredient, uniqueId: nanoid()}
 })
 export const sortCard = (dragIndex: number, hoverIndex: number): ISortCard => ({
     type: SORT_CARD,

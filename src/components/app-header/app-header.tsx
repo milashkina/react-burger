@@ -25,9 +25,9 @@ export const AppHeader: FC = () => {
             )}
         </NavLink>
       </nav>
-      <div>
-        <Logo />
-      </div>
+      <NavLink to={PATH.HOME}>
+          <Logo/>
+      </NavLink>
       <NavLink to={PATH.PROFILE} className={`${style.container} + p-4 text text_type_main-default`}>
         {({isActive}) => (
           <div className={`${style.container}`}>

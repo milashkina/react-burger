@@ -6,8 +6,8 @@ import {
     RESET_PASSWORD_FORM_SUBMIT_FAILED,
     RESET_PASSWORD_FORM_SUBMIT_SUCCESS
 } from "../constants/recover-password";
-import {usePostForgotPassword} from "../../utils/queries/usePostForgotPassword";
-import {usePostResetPassword} from "../../utils/queries/usePostResetPassword";
+import {postForgotPassword} from "../../utils/queries/postForgotPassword";
+import {postResetPassword} from "../../utils/queries/postResetPassword";
 import {TForgotPasswordData, TResetPasswordDataRequest} from "../../types/types";
 import {AppThunkAction} from "../../types";
 
@@ -62,7 +62,7 @@ export const resetPasswordFormSubmitFailed = (): IResetPasswordFormSubmitFailed 
 
 export const postForgotPasswordThunk = (data: TForgotPasswordData): AppThunkAction<Promise<unknown>> => (dispatch) => {
     dispatch(forgotPasswordFormSubmit())
-    return usePostForgotPassword(data).then(
+    return postForgotPassword(data).then(
         () => dispatch(forgotPasswordFormSubmitSuccess(data))
         )
         .catch(() => {
@@ -72,7 +72,7 @@ export const postForgotPasswordThunk = (data: TForgotPasswordData): AppThunkActi
 
 export const postResetPasswordThunk = (data: TResetPasswordDataRequest): AppThunkAction<Promise<unknown>> => (dispatch) => {
     dispatch(resetPasswordFormSubmit())
-    return usePostResetPassword(data).then(
+    return postResetPassword(data).then(
         () => dispatch(resetPasswordFormSubmitSuccess(data)))
         .catch(() => {
             dispatch(resetPasswordFormSubmitFailed)

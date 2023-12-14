@@ -9,20 +9,21 @@ export type TIngredientData = {
     _id: string;
     name: string;
     type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
+    proteins?: number;
+    fat?: number;
+    carbohydrates?: number;
+    calories?: number;
     price: number;
     image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
+    image_mobile?: string;
+    image_large?: string;
+    __v?: number;
 }
 
-export type TBun = TIngredientData | null
+export type TBun = TIngredientCardData
 
 export type TIngredientCardData = TIngredientData & {
+    uniqueId?: string,
     quantity: number;
 }
 
@@ -91,7 +92,7 @@ export type TServerResponse<T> = {
 } & T
 
 export type TGetIngredientsResponse = TServerResponse<{
-    data: TIngredientCardData[]
+    data: TIngredientData[]
 }>
 
 export type TRefreshResponse = TServerResponse<{
@@ -99,8 +100,8 @@ export type TRefreshResponse = TServerResponse<{
     accessToken: string,
 }>
 
-export type TPostLoginResponse = TRefreshResponse & TUser
-export type TPostRegisterResponse = TRefreshResponse & TFormValue
+export type TPostLoginResponse = TRefreshResponse & { user: TUser }
+export type TPostRegisterResponse = TRefreshResponse & { user: TUser }
 
 export type TUser = {
     email: string,
@@ -113,7 +114,6 @@ export type TPatchUser = TServerResponse<{user: TUser}>
 
 export type TForgotPasswordDataRequest = TServerResponse<TForgotPasswordData>
 export type TOrderData = {ingredients: string[]}
-export type TOrderDataRequest = TServerResponse<TOrderData>
 
 export type TOrderDataSuccessRequest = TServerResponse<{
     order: {

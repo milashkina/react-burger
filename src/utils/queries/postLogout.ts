@@ -1,8 +1,8 @@
 import {ENDPOINT, NORMA_URL, TOKEN} from "../constant";
-import {fetchWithRefresh} from "./useFetchWithRefresh";
+import {fetchWithRefresh} from "./fetchWithRefresh";
 import {TLogoutResponse} from "../../types/types";
 
-export const usePostLogout = (): Promise<TLogoutResponse> => {
+export const postLogout = (): Promise<TLogoutResponse> => {
   return fetchWithRefresh<TLogoutResponse>(`${NORMA_URL}${ENDPOINT.LOGOUT}`, {
     method: 'POST',
     headers: {

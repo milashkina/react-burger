@@ -5,7 +5,7 @@ import {
   INCREASE_COUNT,
   DECREASE_COUNT,
 } from "../constants/burger-ingredients";
-import { INGREDIENTS_TITLES} from "../../utils/constant";
+import {INGREDIENT_TYPE, INGREDIENTS_TITLES} from "../../utils/constant";
 import {REVERSE_BUN} from "../constants/burger-ingredients";
 import {TIngredientCardData,} from "../../types/types";
 import {TIngredientsAction} from "../actions/burger-ingredients";
