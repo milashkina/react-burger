@@ -78,10 +78,7 @@ export const App: FC = () => {
              <Route
                  path={PATH.ORDER}
                  element={
-                   <Modal onClose={handleCloseOrderFeedInfo}>
-                     <OrderCard/>
-                   </Modal>
-                 } />
+               <ProtectedRouteElement element={<Modal onClose={handleCloseOrderFeedInfo}><OrderCard/></Modal>} />} />
            </Routes>
        )}
          {background && (

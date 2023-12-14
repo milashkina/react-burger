@@ -15,11 +15,11 @@ export const OrderCard: FC = () => {
     const { orderNumber } = useParams<{ orderNumber?: string }>()
     const dispatch = useDispatch()
     const {pathname} = useLocation()
-
     const token = getCookie(TOKEN.ACCESS);
     const wsUrl: string = pathname.includes(PATH.PROFILE_ORDERS) ? WS_USER_ORDERS_URL : WS_ALL_ORDERS_URL
     const wsUrlConnection = wsUrl  + `?token=${token}`;
     const { orders }  = useSelector(state => state.ws)
+
     useEffect(() => {
         dispatch(wsConnectionStartAction(wsUrlConnection))
         return () => {
