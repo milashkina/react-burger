@@ -1,7 +1,7 @@
 import style from "../profile.module.css";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INPUT, SIZE} from "../../../utils/constant";
-import React, {FormEvent, useEffect, useRef, useState} from "react";
+import React, {FormEvent, useRef, useState} from "react";
 import {useDispatch, useSelector} from "../../../services/hook";
 import {patchUserThunk} from "../../../services/actions/user";
 
@@ -15,12 +15,6 @@ export const ProfileEdit = () => {
     email: email,
     password: '',
   })
-
-/*  useEffect(() => {
-    if (name !== '' & email !== '') {
-
-    }
-  }, []);*/
 
   const isChange = name !== formValue.name || email !== formValue.email || formValue.password !== ''
 
