@@ -1,9 +1,6 @@
-export function setCookie(name: string, value: string, props?: any
-/*{
-  path?: string
-  expires?: Date | string | number
-  [propName: string]: any
-}*/) {
+
+// TODO: понять на какой тип поменять props any
+export const setCookie = (name: string, value: string | number | boolean, props: any) => {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == 'number' && exp) {
@@ -17,7 +14,7 @@ export function setCookie(name: string, value: string, props?: any
   value = encodeURIComponent(value);
   let updatedCookie = name + '=' + value;
   for (const propName in props) {
-    updatedCookie += '; ' + propName;
+    updatedCookie += '; ' + propName.toString();
     const propValue = props[propName];
     if (propValue !== true) {
       updatedCookie += '=' + propValue;

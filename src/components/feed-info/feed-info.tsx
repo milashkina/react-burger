@@ -4,7 +4,6 @@ import globalStyle from '../app/app.module.css'
 import style from './feed-info.module.css'
 import {useSelector} from "../../services/hook";
 import {STATUS, TOrders} from "../../types/types";
-import {nanoid} from "nanoid/non-secure";
 export const FeedInfo = () => {
     const {orders, total, totalToday} = useSelector(state => state.ws)
     let doneOrders: TOrders = []
@@ -21,7 +20,7 @@ export const FeedInfo = () => {
                     <div className={`${style.orderColumn} text text_type_digits-default`}>
                         {
                             doneOrders.map((doneOrder) =>
-                                <span className={`${style.successOrder}`} key={nanoid()}>{doneOrder.number}</span>)
+                                <span className={`${style.successOrder}`} key={doneOrder._id}>{doneOrder.number}</span>)
                         }
                     </div>
                 </div>
@@ -30,7 +29,7 @@ export const FeedInfo = () => {
                     <div className={`${style.orderColumn} text text_type_digits-default`}>
                         {
                             inProgressOrders.map((inProgressOrder) =>
-                                <span key={nanoid()}>{inProgressOrder.number}</span>)
+                                <span key={inProgressOrder._id}>{inProgressOrder.number}</span>)
                         }
                     </div>
                 </div>

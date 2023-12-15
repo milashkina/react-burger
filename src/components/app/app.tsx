@@ -32,7 +32,7 @@ export const App: FC = () => {
   const locationState = location.state as {backgroundLocation: Location}
   const background = locationState && locationState.backgroundLocation
   const navigate = useNavigate()
-  const orderInfoModal = useSelector((state: any) => state.orderInfo.modalIsOpen)
+  const orderInfoModal = useSelector((state) => state.orderInfo.modalIsOpen)
 
   function handleCloseOrderDetails(): void {
     dispatch(closeOrderInfoModal())

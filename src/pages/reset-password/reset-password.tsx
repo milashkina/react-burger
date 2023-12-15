@@ -10,7 +10,7 @@ import React, {FormEvent, useRef, useState} from "react";
 export const ResetPasswordPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector((state: any) => state.access)
+  const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector((state) => state.access)
 
     const [ formValue, setFormValue ] = useState({
         password: '',

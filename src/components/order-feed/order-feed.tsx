@@ -3,7 +3,6 @@ import globalStyle from '../app/app.module.css'
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 import {FC, useMemo} from "react";
 import {STATUS, TActiveOrder, TIngredientCardData} from "../../types/types";
-import {nanoid} from "nanoid/non-secure";
 import {Link, useLocation} from "react-router-dom";
 import {PATH} from "../../utils/constant";
 import {selectOrderAction} from "../../services/actions/feed";
@@ -65,7 +64,7 @@ export const OrderFeed: FC<TOrder> = ({order}) => {
                 <div className={`${style.thumbnailLayout}`}>
                     <div className={`${style.thumbnailImgLayout}`}>
                         {orderInfo.ingredientsToShow.map((ingredient) => (
-                            <img className={`${style.thumbnailImg} + ml-2`} src={ingredient.image} alt={ingredient.name} key={nanoid()} title={ingredient.name}/>
+                            <img className={`${style.thumbnailImg} + ml-2`} src={ingredient.image} alt={ingredient.name} key={ingredient._id} title={ingredient.name}/>
                         ))}
                         {orderInfo.remains && <span className={`text text_type_digits-default`}><br className={`text text_type_main-small`}/>+{orderInfo.remains}</span>}
                     </div>
