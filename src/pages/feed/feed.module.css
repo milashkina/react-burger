@@ -1,0 +1,17 @@
+.feedLayout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    overflow-y: hidden;
+}
+.feedLayout > p {
+    display: inline-block;
+    width: 1100px;
+}
+.feedLayoutContent {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}

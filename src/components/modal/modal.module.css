@@ -5,11 +5,12 @@
     width: 640px;
     align-items: center;
     border-radius: 40px;
-    border: 1px solid var(rgba(76, 76, 255, 0.20));
-    background: var(--interface-modal-bg, #1C1C21);
+    border: 1px solid var(rgba(76, 76, 255, 0.2));
+    background: var(--interface-modal-bg, #1c1c21);
     position: fixed;
-    top: 5%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
 }
 .modalWrap > .heading {

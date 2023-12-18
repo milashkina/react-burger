@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {TInput, TSize} from "../types/types";
 
 export const INGREDIENTS_TITLES : {
@@ -73,6 +72,8 @@ export const DND_TYPES: {
 
 export const NORMA_URL: string = 'https://norma.nomoreparties.space/api'
 
+export const WS_ALL_ORDERS_URL: string = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_USER_ORDERS_URL: string = 'wss://norma.nomoreparties.space/orders';
 export const ENDPOINT = {
   LOGIN: '/auth/login',
   REGISTER: '/auth/register',
@@ -85,23 +86,6 @@ export const ENDPOINT = {
   INGREDIENTS: '/ingredients',
 }
 
-export const INGREDIENT_PROP_TYPES = PropTypes.shape(
-  {
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates:PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired,
-  }
-).isRequired
-
 export const PATH = {
   HOME: '/',
   REGISTER: '/register',
@@ -111,6 +95,9 @@ export const PATH = {
   PROFILE: '/profile',
   PROFILE_EDIT: '/profile/edit',
   PROFILE_ORDERS: '/profile/orders',
+  ORDER: '/profile/orders/:orderNumber',
   INGREDIENT: '/ingredients/:id',
+  FEED: '/feed',
+  FEED_ID: '/feed/:orderNumber',
 }
 

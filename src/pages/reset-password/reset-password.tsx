@@ -2,15 +2,15 @@ import globalStyle from "../../components/app/app.module.css";
 import {Button,  Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useNavigate} from "react-router-dom";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
-import { postResetPassword} from "../../services/reducers/access";
-import {useDispatch, useSelector} from "react-redux";
+import {postResetPasswordThunk} from "../../services/actions/recover-password";
+import {useDispatch, useSelector} from "../../services/hook";
 import React, {FormEvent, useRef, useState} from "react";
 
 
 export const ResetPasswordPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector((state: any) => state.access)
+  const {forgotPasswordSuccess, resetPasswordSuccess, isAuth} = useSelector((state) => state.access)
 
     const [ formValue, setFormValue ] = useState({
         password: '',
@@ -26,10 +26,9 @@ export const ResetPasswordPage = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch<any>(postResetPassword(formValue))
+        dispatch(postResetPasswordThunk(formValue))
     }
 
- // const [formValue, handleChange, handleSubmit] = useForm(onSubmit)
   const inputRef = useRef<HTMLInputElement>(null)
   const onClickLogin = () => {
     navigate(PATH.LOGIN)

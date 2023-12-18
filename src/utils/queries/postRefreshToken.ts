@@ -1,9 +1,9 @@
 import {ENDPOINT, NORMA_URL, TOKEN,} from "../constant";
-import {fetchWithRefresh} from "./useFetchWithRefresh";
+import {fetchWithRefresh} from "./fetchWithRefresh";
 import {TRefreshResponse} from "../../types/types";
 
 export const postRefreshToken = (): Promise<TRefreshResponse> => {
-  return fetchWithRefresh(`${NORMA_URL}${ENDPOINT.REFRESH_TOKEN}`, {
+  return fetchWithRefresh<TRefreshResponse>(`${NORMA_URL}${ENDPOINT.REFRESH_TOKEN}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

@@ -1,0 +1,43 @@
+.orderIdModalLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+.allIngredientLayout {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.ingredientsLayout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+.ingredientsLayout > img {
+    width: 64px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #801AB2;
+    background: #131316;
+}
+.currencyLayout{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+.bottomTip {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+}
+.currencyTip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+

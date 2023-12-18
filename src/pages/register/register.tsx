@@ -1,18 +1,19 @@
 import globalStyle from '../../../src/components/app/app.module.css'
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useRef, useState} from "react";
+import React, {FormEvent, useRef, useState} from "react";
 import {INPUT, PATH, SIZE} from "../../utils/constant";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {postLogin, postRegister} from "../../services/reducers/access";
+import {useDispatch} from "../../services/hook";
+import {postRegisterThunk, postLoginThunk} from "../../services/actions/entries";
 
 
 export const RegisterPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const onSubmit = () => {
-    dispatch<any>(postRegister(formValue))
-    dispatch<any>(postLogin(formValue))
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(postRegisterThunk(formValue))
+    dispatch(postLoginThunk(formValue))
   }
 
   const [ formValue, setFormValue ] = useState({
@@ -28,7 +29,6 @@ export const RegisterPage = () => {
     })
   }
 
- // const [formValue, handleChange, handleSubmit] = useForm(onSubmit)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onIconClick = () => {

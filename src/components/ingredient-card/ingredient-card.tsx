@@ -12,7 +12,7 @@ interface IIngredientCard {
 }
 export const IngredientCard: FC<IIngredientCard> = ({ingredient, onSelect }): JSX.Element => {
   const location = useLocation()
-  const {image, name, price, quantity, _id} = ingredient
+  const {image, name, price, _id, quantity} = ingredient
   const [ { isDragging },dragRef] = useDrag({
     type: DND_TYPES.ADD_INGREDIENT,
     item: ingredient,

@@ -1,0 +1,8 @@
+.orderListLayout {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height:756px;
+    overflow-y: auto;
+    gap: 16px;
+}
