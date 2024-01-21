@@ -12,7 +12,7 @@ export interface ISelectIngredient {
 }
 export interface IUnselectIngredient {
     readonly type: typeof UNSELECT_INGREDIENT,
-    readonly selectedIngredient: TIngredientData,
+    readonly selectedIngredient: null,
 }
 export interface IOpenIngredientDetailsModal {
     readonly type: typeof OPEN_INGREDIENT_DETAILS_MODAL,
@@ -24,4 +24,15 @@ export type TDetailsAction = ISelectIngredient | IUnselectIngredient | IOpenIngr
 
 export const openIngredientDetailsModal = (): IOpenIngredientDetailsModal => ({
     type: OPEN_INGREDIENT_DETAILS_MODAL
+})
+export const closeIngredientDetailsModal = (): ICloseIngredientDetailsModal => ({
+    type: CLOSE_INGREDIENT_DETAILS_MODAL
+})
+export const selectIngredient = (selectedIngredient: TIngredientData): ISelectIngredient => ({
+    type: SELECT_INGREDIENT,
+    selectedIngredient
+})
+export const unselectIngredient = (): IUnselectIngredient => ({
+    type: UNSELECT_INGREDIENT,
+    selectedIngredient: null
 })

@@ -14,7 +14,7 @@ type TState = {
   isSuccess: boolean,
   modalIsOpen: boolean,
 }
-const initialState: TState = {
+export const initialState: TState = {
   orderId: null,
   name: '',
   OrderRequest: false,

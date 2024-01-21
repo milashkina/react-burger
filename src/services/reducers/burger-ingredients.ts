@@ -16,7 +16,7 @@ type TState = {
   isSuccess: boolean,
   elem: string,
 }
-const initialState: TState = {
+export const initialState: TState = {
   ingredients: [],
   ingredientsRequest: false,
   isSuccess: false,

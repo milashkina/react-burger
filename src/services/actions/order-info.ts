@@ -8,6 +8,7 @@ import {
 import {usePostOrder} from "../../utils/queries/postOrder";
 import {TOrderData, TOrderDataSuccessRequest} from "../../types/types";
 import {AppDispatch, AppThunkAction} from "../../types";
+import {cleanConstructor} from "./burger-constructor";
 
 export interface IPostOrderRequest {
     readonly type: typeof POST_ORDER_REQUEST
@@ -41,7 +42,6 @@ export const closeOrderInfoModal = (): ICloseOrderInfoModal => ({
 })
 export const postOrderRequest = (): IPostOrderRequest => ({
     type: POST_ORDER_REQUEST,
-
 })
 export const postOrderSuccess = (res: TOrderDataSuccessRequest): IPostOrderSuccess => ({
     type: POST_ORDER_SUCCESS,
@@ -59,6 +59,7 @@ export const postOrderThunk = (data: TOrderData): AppThunkAction => (dispatch: A
     usePostOrder(data)
         .then((res) => {
             dispatch(postOrderSuccess(res))
+            dispatch(cleanConstructor())
         })
         .catch(() => {
             dispatch(postOrderFailed())

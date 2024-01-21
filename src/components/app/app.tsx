@@ -23,6 +23,7 @@ import {FeedPage} from "../../pages/feed/feed";
 import {OrderIdFeedPage} from "../../pages/order-id-feed/order-id-feed";
 import {OrderCard} from "../order-card/order-card";
 import {unselectOrderAction} from "../../services/actions/feed";
+import {closeIngredientDetailsModal, unselectIngredient} from "../../services/actions/details";
 
 export const App: FC = () => {
 
@@ -39,6 +40,8 @@ export const App: FC = () => {
   }
   function handleCloseIngredientInfo(): void {
     navigate(-1)
+    dispatch(closeIngredientDetailsModal())
+    dispatch(unselectIngredient())
   }
   function handleCloseOrderFeedInfo(): void {
     navigate(-1)

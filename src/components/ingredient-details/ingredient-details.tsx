@@ -12,10 +12,10 @@ export const IngredientDetails: FC = () => {
   const {image_large, name, calories, proteins, fat, carbohydrates} = selectedIngredient ?? {}
 
   return (
-    <div className={`${style.detailsWrapper}`}>
+    <div className={`${style.detailsWrapper}`} >
       {isSuccess ? (
         <>
-          <img src={image_large} alt={name} className={`mb-4`}/>
+          <img src={image_large} alt={name} className={`mb-4`} data-testId={'details-image'} data-test={`${isSuccess}-image`}/>
           <span className={`text text_type_main-medium mb-8`}>{name}</span>
           <div className={`mb-5`}>
             <div>
@@ -37,7 +37,7 @@ export const IngredientDetails: FC = () => {
           </div>
         </>
       ) : (
-        <span className={`text text_type_main-large`}>Loading...</span>
+        <span className={`text text_type_main-large`} data-test={'loader_details_section'}>Loading...</span>
       )}
   </div>
   )

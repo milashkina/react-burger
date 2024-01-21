@@ -54,8 +54,8 @@ export const getIngredientRequestSuccess = (ingredients: TIngredientCardData[]):
 })
 export const reverseBun = (bun: TBun, _id: string): IReverseBun => ({
     type: REVERSE_BUN,
-    bun,
-    _id
+    bun, //на какую меняем
+    _id // ее же айдишник
 })
 export const increaseCount = (ingredient: TIngredientCardData, _id: string): IIncreaseCount => ({
     type: INCREASE_COUNT,

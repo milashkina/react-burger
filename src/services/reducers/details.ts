@@ -10,16 +10,9 @@ type TState = {
   modalIsOpen: boolean,
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   selectedIngredient: null,
   modalIsOpen: false,
-}
-
-export function selectIngredient(ingredient: TIngredientData) {
-  return {
-    type: SELECT_INGREDIENT,
-    selectedIngredient: ingredient,
-  };
 }
 
 export const ingredientDetailsReducer = (state: TState = initialState, action: TDetailsAction): TState  => {

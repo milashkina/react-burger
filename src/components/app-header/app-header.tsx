@@ -8,7 +8,7 @@ export const AppHeader: FC = () => {
   return(
     <header className={`${style.appHeader} + p-4`}>
       <nav className={`${style.navMenu}`}>
-        <NavLink to={PATH.HOME} className={`${style.container} + p-4 text text_type_main-default`}>
+        <NavLink to={PATH.HOME} className={`${style.container} + p-4 text text_type_main-default`} data-test={'constructor_btn'}>
           {({isActive}) => (
             <>
               <div className={`${style.container} + mr-2`} ><BurgerIcon type={isActive ? "primary" : "secondary"} /></div>
@@ -28,7 +28,7 @@ export const AppHeader: FC = () => {
       <NavLink to={PATH.HOME}>
           <Logo/>
       </NavLink>
-      <NavLink to={PATH.PROFILE} className={`${style.container} + p-4 text text_type_main-default`}>
+      <NavLink to={PATH.PROFILE} className={`${style.container} + p-4 text text_type_main-default`} data-test={'profile_btn'}>
         {({isActive}) => (
           <div className={`${style.container}`}>
             <div className={`${style.container} + mr-2`} ><ProfileIcon type={isActive ? "primary" : "secondary"} /></div>

@@ -34,7 +34,7 @@ export const Modal = (props : React.PropsWithChildren<IModal>) => {
             <div className={`${style.modalWrap} + p-10`} onClick={(e) => {e.stopPropagation()}}>
               <div className={`${style.heading}`}>
                 <span className={`text text_type_main-large pr-9`}>{props.header}</span>
-                <div className={`${style.iconClose}`} onClick={props.onClose}>
+                <div className={`${style.iconClose}`} onClick={props.onClose} data-test={'close_modal_details_icon'}>
                   <CloseIcon type="primary" />
                 </div>
               </div>

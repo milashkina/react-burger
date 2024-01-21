@@ -3,7 +3,7 @@ import React, {FC, SyntheticEvent, useEffect, useMemo, useState} from "react";
 import style from './burger-ingredients.module.css'
 import { ProductList } from "../product-list/product-list";
 import {useDispatch, useSelector} from "../../services/hook";
-import {selectIngredient} from '../../services/reducers/details'
+import {selectIngredient} from '../../services/actions/details'
 import {INGREDIENT_TYPE, INGREDIENTS_TITLES} from "../../utils/constant";
 import {TIngredientCardData} from "../../types/types";
 import {openIngredientDetailsModal} from "../../services/actions/details";
@@ -90,7 +90,7 @@ export const BurgerIngredients: FC = () => {
       ) : (
         <div className={`${style.productList}`} onScroll={handleScroll}>
           <h2 className={`text text_type_main-medium`} ref={bunRef}>{INGREDIENTS_TITLES.BUN}</h2>
-          <ProductList ingredients={bunArr} onSelect={handleIngredientCardClick}/>
+          <ProductList ingredients={bunArr} onSelect={handleIngredientCardClick} />
           <h2 className={`text text_type_main-medium`} ref={sauceRef}>{INGREDIENTS_TITLES.SAUCE}</h2>
           <ProductList ingredients={sauceArr} onSelect={handleIngredientCardClick}/>
           <h2 className={`text text_type_main-medium`} ref={mainRef}>{INGREDIENTS_TITLES.MAIN}</h2>

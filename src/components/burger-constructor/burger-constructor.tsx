@@ -72,16 +72,19 @@ export const BurgerConstructor: FC = () => {
   }
 
   return (
-    <section ref={drop} className={ isOver ? `${style.borderAccent} + pt-15` : 'pt-15'}>
+    <section ref={drop} data-test={'constructor_section'} className={ isOver ? `${style.borderAccent} + pt-15` : 'pt-15'}>
       <section className={`${style.containerConstructor} + pl-8 pb-4`}>
-        {bun === null ? (<span className={`${style.startSectionBun} + text text_color_primary`} > Add bun in your burger </span>) :
-          (<ConstructorElement
-          type="top"
-          isLocked
-          text={bun?.name + '(верх)'}
-          price={bun?.price}
-          thumbnail={bun?.image}
-        />)}
+        {bun === null ?
+            (<span className={`${style.startSectionBun} + text text_color_primary`} > Add bun in your burger </span>)
+            :
+            (<ConstructorElement
+            type="top"
+            isLocked
+            text={bun?.name + '(верх)'}
+            price={bun?.price}
+            thumbnail={bun?.image}
+          />)
+        }
       </section>
       <div className={`${style.containerConstructor}`}>
         <div className={`${style.containerConstructorInside}`}>
@@ -112,7 +115,7 @@ export const BurgerConstructor: FC = () => {
           <span className={`pr-2 text text_type_digits-medium`} >{total}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={handlePostOrder}>
+        <Button htmlType="button" type="primary" size="large" onClick={handlePostOrder} data-test={'get-order-request'}>
           Оформить заказ
         </Button>
       </div>
