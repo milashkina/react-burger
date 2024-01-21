@@ -5,7 +5,6 @@ import {useDrag} from "react-dnd";
 import globalStyle from '../app/app.module.css'
 import {Link, useLocation} from "react-router-dom";
 import {TIngredientCardData} from "../../types/types";
-import {ingredientsTestData} from "../__test__/data/data";
 
 interface IIngredientCard {
     ingredient: TIngredientCardData,
