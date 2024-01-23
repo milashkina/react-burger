@@ -1,10 +1,10 @@
-import {initialState, wsReducer} from "../../../services/reducers/ws-reducer";
+import {initialState, wsReducer} from "../../services/reducers/ws-reducer";
 import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS, WS_GET_ORDERS
-} from "../../../services/constants/wsActionTypes";
+} from "../../services/constants/wsActionTypes";
 
 
 describe('check initialState', () => {

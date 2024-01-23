@@ -1,10 +1,10 @@
-import {ingredientDetailsReducer, initialState} from "../../../services/reducers/details";
+import {ingredientDetailsReducer, initialState} from "../../services/reducers/details";
 import {
   CLOSE_INGREDIENT_DETAILS_MODAL,
   OPEN_INGREDIENT_DETAILS_MODAL,
   SELECT_INGREDIENT,
   UNSELECT_INGREDIENT
-} from "../../../services/constants/details";
+} from "../../services/constants/details";
 
 
 describe('check initialState and details reducers', () => {

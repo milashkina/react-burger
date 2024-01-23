@@ -1,6 +1,6 @@
-import {burgerConstructorReducer} from "../../../services/reducers/burger-constructor";
-import {initialState} from "../../../services/reducers/burger-constructor";
-import {ADD_INGREDIENT, CHANGE_BUN, DELETE_INGREDIENT, SORT_CARD} from "../../../services/constants/burger-constructor";
+import {burgerConstructorReducer} from "../../services/reducers/burger-constructor";
+import {initialState} from "../../services/reducers/burger-constructor";
+import {ADD_INGREDIENT, CHANGE_BUN, DELETE_INGREDIENT, SORT_CARD} from "../../services/constants/burger-constructor";
 import {ingredientsTestData} from "../data/data";
 describe( 'check initialState and all burger-constructor reducers',() => {
   test('should return initialState', () => {

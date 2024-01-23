@@ -1,6 +1,6 @@
 describe('check burger-constructor passes', () => {
 
-  it('отображение в модальном окне данных ингредиента', () => {
+  it('проверка на отображение в модальном окне данных ингредиента', () => {
     cy.visit('/')
     cy.get('[alt="Краторная булка N-200i"]').click("center")
     cy.location().should((location) => expect(location.pathname).to.eq('/ingredients/643d69a5c3f7b9001cfa093c'))
@@ -8,9 +8,9 @@ describe('check burger-constructor passes', () => {
     cy.get('[data-test="close_modal_details_icon"]').click('center')
   })
 
-  it('check do the order', () => {
-    const email: string = 'milakina.ad@yandex.ru'
-    const password: string = '123456789'
+  it('проверка создания заказа. отображение модального окна с информацией о заказе после успешного ответа с сервера.', () => {
+    const email = 'milakina.ad@yandex.ru'
+    const password = '123456789'
     cy.visit('/')
     cy.get('[data-test="profile_btn"]').click("center")
     cy.get('[data-test="email_login_input"]').type(`${email}{enter}`)

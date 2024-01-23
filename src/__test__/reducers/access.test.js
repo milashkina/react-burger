@@ -1,9 +1,9 @@
-import {accessReducer, initialState} from '../../../services/reducers/access'
+import {accessReducer, initialState} from '../../services/reducers/access'
 import {
   LOGIN_FORM_SUBMIT, LOGIN_FORM_SUBMIT_FAILED,
   LOGIN_FORM_SUBMIT_SUCCESS, REGISTER_FORM_SUBMIT, REGISTER_FORM_SUBMIT_FAILED,
   REGISTER_FORM_SUBMIT_SUCCESS
-} from "../../../services/constants/entries";
+} from "../../services/constants/entries";
 import {
   FORGOT_PASSWORD_FORM_SUBMIT,
   FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
@@ -11,13 +11,13 @@ import {
   RESET_PASSWORD_FORM_SUBMIT,
   RESET_PASSWORD_FORM_SUBMIT_FAILED,
   RESET_PASSWORD_FORM_SUBMIT_SUCCESS
-} from "../../../services/constants/recover-password";
+} from "../../services/constants/recover-password";
 import {
   EDIT_PROFILE_FORM_SUBMIT,
   EDIT_PROFILE_FORM_SUBMIT_FAILED,
   EDIT_PROFILE_FORM_SUBMIT_SUCCESS, GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS
-} from "../../../services/constants/user";
-import {LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS} from "../../../services/constants/logout";
+} from "../../services/constants/user";
+import {LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS} from "../../services/constants/logout";
 describe('check InitialState and all access reducers', () => {
   test('should return initialState', () => {
     const action = {}

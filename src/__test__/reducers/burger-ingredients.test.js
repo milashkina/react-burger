@@ -1,12 +1,12 @@
-import {burgerIngredientsReducer} from "../../../services/reducers/burger-ingredients";
-import {initialState} from "../../../services/reducers/burger-ingredients";
+import {burgerIngredientsReducer} from "../../services/reducers/burger-ingredients";
+import {initialState} from "../../services/reducers/burger-ingredients";
 import {ingredientsTestData} from "../data/data";
 import {
   DECREASE_COUNT,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS, INCREASE_COUNT, REVERSE_BUN
-} from "../../../services/constants/burger-ingredients";
+} from "../../services/constants/burger-ingredients";
 
 
 describe('check initialState and all burger ingredients reducers',() => {

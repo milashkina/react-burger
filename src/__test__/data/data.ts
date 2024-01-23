@@ -1,4 +1,4 @@
-import {TIngredientData} from "../../../types/types";
+import {TIngredientData} from "../../types/types";
 
 export const ingredientsTestData: TIngredientData[] = [
   {

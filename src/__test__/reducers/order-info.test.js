@@ -1,11 +1,11 @@
-import {initialState, orderInfoReducer} from "../../../services/reducers/order-info";
+import {initialState, orderInfoReducer} from "../../services/reducers/order-info";
 import {
   CLOSE_ORDER_INFO_MODAL,
   OPEN_ORDER_INFO_MODAL,
   POST_ORDER_FAILED,
   POST_ORDER_REQUEST,
   POST_ORDER_SUCCESS
-} from "../../../services/constants/order-info";
+} from "../../services/constants/order-info";
 
 
 describe('check initialState', () => {
