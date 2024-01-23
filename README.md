@@ -9,14 +9,14 @@
 # Стек технологий
 
 <ul style="list-style: none">
-    <li><img src="https://img.shields.io/badge/-React-202124?logo=react&logoColor=61DAFB&style=flat-square" /></li>
-    <li><img src="https://img.shields.io/badge/Redux-593D88?style=flat-square&logo=redux&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white" /></li>
-    <li><img src="https://img.shields.io/badge/Cypress-17202C?style=flat-square&logo=cypress&logoColor=white" /></li>
+    <li><img src="https://img.shields.io/badge/-React-202124?logo=react&logoColor=61DAFB&style=flat-square" alt="logo react"/></li>
+    <li><img src="https://img.shields.io/badge/Redux-593D88?style=flat-square&logo=redux&logoColor=white" alt="logo redux"/></li>
+    <li><img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="logo TypeScript"/></li>
+    <li><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="logo HTML5"/></li>
+    <li><img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="logo css3"/></li>
+    <li><img src="https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" alt="logo react router"/></li>
+    <li><img src="https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white" alt="logo jest"/></li>
+    <li><img src="https://img.shields.io/badge/Cypress-17202C?style=flat-square&logo=cypress&logoColor=white" alt="logo cypress"/></li>
 </ul> 
 
 # Реализованный функционал
