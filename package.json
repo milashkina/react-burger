@@ -59,7 +59,7 @@
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
   },
-  "homepage": "https://milashkina.github.io/react-burger/",
+  "homepage": "https://milashkina.github.io/react-burger/index.html",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build"
 }
