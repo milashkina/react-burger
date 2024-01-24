@@ -1,46 +1,32 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="src/images/logo_stellar_burgers.svg" alt="name of burger-point with neon burger">
 
-## Available Scripts
+# Описание
+**Учебное приложение для бургерной на краю галактики**
 
-In the project directory, you can run:
+В центре приложения - конструктор бургеров для заказа в зале заведения. Помимо возможности собрать свой бургер, в приложении присутствует личный кабинет с историей заказов пользователя. Так же есть реализация real-time ленты заказов. Приложение содержит порядка 15ти запросов к API. Приложение имеет только десктопную версию для упращения тестирования user-interface. Оценить проделанную работу можно по ссылке: https://milashkina.github.io/react-burger/
 
-### `npm start`
+# Стек технологий
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<ul style="list-style: none">
+    <li><img src="https://img.shields.io/badge/-React-202124?logo=react&logoColor=61DAFB&style=flat-square" alt="logo react"/></li>
+    <li><img src="https://img.shields.io/badge/Redux-593D88?style=flat-square&logo=redux&logoColor=white" alt="logo redux"/></li>
+    <li><img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="logo TypeScript"/></li>
+    <li><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="logo HTML5"/></li>
+    <li><img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="logo css3"/></li>
+    <li><img src="https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" alt="logo react router"/></li>
+    <li><img src="https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white" alt="logo jest"/></li>
+    <li><img src="https://img.shields.io/badge/Cypress-17202C?style=flat-square&logo=cypress&logoColor=white" alt="logo cypress"/></li>
+</ul> 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Реализованный функционал
++ конструктор для создания межгалактического бургера. С помощью библиотеки Drag&Drop реализован функционал перетаскивания ингредиентов.
++ Модальные окна с информацией об ингредиенте.
++ Сортировка и удаление ингредиентов на этапе создания заказа.
++ Формы регистрации, авторизации и проработка user-flow по восстановлению пароля.
++ Динамические безопасные роуты для всего функционала. 
++ Использование cookie-файлов и локального хранилища для аутентификации пользователей.
++ Личный кабинет содержит следующий функционал: редактирование данных пользователя, просмотр истории покупок пользователя с детализацией и выходом из системы.
++ Лента заказов реализована с использованием Web-sockets. 
++ Для организации хранилища был использован Redux. Безопасность хранилища достигнута путем типизации самого хранилища, его усилителей и мидлвары. Ну и Jest юнит-тесты конечно :)
++ Написаны внешние тесты на cypress

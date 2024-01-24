@@ -50,11 +50,13 @@ export const LoginPage = (): JSX.Element => {
         value={formValue.email}
         name={INPUT.NAME.EMAIL}
         isIcon={false}
+        data-test={'email_login_input'}
       />
       <PasswordInput
         onChange={handleChange}
         value={formValue.password}
         name={INPUT.NAME.PASSWORD}
+        data-test={'password_login_input'}
       />
       <Button htmlType="submit" type="primary" size="medium" extraClass="mb-10">
         Войти

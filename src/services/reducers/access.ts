@@ -61,7 +61,7 @@ type TState = {
   logoutFailed: boolean,
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   isAuth: false,
 
   user: {
@@ -207,7 +207,6 @@ export const accessReducer = (state: TState = initialState, action: TAccessActio
           ...state.user,
           name: action.user.user.name,
           email: action.user.user.email,
-         // password: action.user.user.password
         }
       }
     }
@@ -257,6 +256,11 @@ export const accessReducer = (state: TState = initialState, action: TAccessActio
       return {
         ...state,
         logoutRequest: false,
+        user: {
+          name: initialState.user.name,
+          email: initialState.user.email,
+          password: initialState.user.password
+        }
       }
     }
     case LOGOUT_FAILED: {

@@ -27,6 +27,7 @@ export const IngredientCard: FC<IIngredientCard> = ({ingredient, onSelect }): JS
       state={{ backgroundLocation: location }}
       ref={dragRef}
       onClick={() => onSelect(ingredient)}
+      data-test={`${ingredient._id}`}
       className={isDragging ? `${globalStyle.colorAccent} ${globalStyle.IngredientCardLayout}` : `${globalStyle.IngredientCardLayout} text_color_primary` } >
       {!!quantity && <Counter count={quantity} size="default" extraClass="m-1"/>}
       <img src={image} alt={name} className={`p-4`} />
