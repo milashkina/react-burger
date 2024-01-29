@@ -31,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "npx cypress open"
+    "cypress": "npx cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +61,5 @@
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
   },
-  "homepage": "https://milashkina.github.io/react-burger/",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+  "homepage": "https://milashkina.github.io/react-burger/"
 }
