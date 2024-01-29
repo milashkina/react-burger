@@ -1,6 +1,4 @@
 
-<img src="src/images/logo_stellar_burgers.svg" alt="name of burger-point with neon burger">
-
 # Описание
 **Учебное приложение для бургерной на краю галактики**
 
